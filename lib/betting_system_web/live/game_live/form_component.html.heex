@@ -9,9 +9,14 @@
     phx-change="validate"
     phx-submit="save">
   
-    <%= label f, :type %>
-    <%= text_input f, :type %>
-    <%= error_tag f, :type %>
+    <%= label f, :sport %>
+     <%= select f, :sport_id, @sports, prompt: "Select a sport"%>
+    <%= error_tag f, :sport_id %>
+
+  
+    <%= label f, :teams %>
+    <%= text_input f, :teams %>
+    <%= error_tag f, :teams %>  
   
     <%= label f, :date %>
     <%= datetime_select f, :date %>

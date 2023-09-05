@@ -42,9 +42,11 @@ defmodule BettingSystemWeb.SportLive.FormComponent do
 
   defp save_sport(socket, :new, sport_params) do
     new_sport_params =
-    sport_params
-    |>Map.put("user_id", socket.assigns.user.id)
+      sport_params
+      |> Map.put("user_id", socket.assigns.user.id)
+
     IO.inspect(new_sport_params)
+
     case Sports.create_sport(new_sport_params) do
       {:ok, _sport} ->
         {:noreply,

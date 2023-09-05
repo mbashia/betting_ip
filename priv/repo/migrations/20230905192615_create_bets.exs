@@ -4,7 +4,6 @@ defmodule BettingSystem.Repo.Migrations.CreateBets do
   def change do
     create table(:bets) do
       add :amount, :float
-      add :outcome, :string
       add :odds, :float
       add :status, :string
       add :payout, :float
@@ -12,7 +11,7 @@ defmodule BettingSystem.Repo.Migrations.CreateBets do
 
       timestamps()
     end
-    create index(:bets, [:user_id])
 
+    create index(:bets, [:user_id])
   end
 end

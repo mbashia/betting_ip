@@ -21,6 +21,11 @@ defmodule BettingSystem.Sports do
     Repo.all(Sport)
   end
 
+  def list_sports(user_id) do
+    Repo.all(from s in Sport, where: s.user_id == ^user_id, select: {s.name, s.id})
+  end
+
+
   @doc """
   Gets a single sport.
 

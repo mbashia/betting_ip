@@ -4,9 +4,36 @@ defmodule BettingSystemWeb.GameLiveTest do
   import Phoenix.LiveViewTest
   import BettingSystem.GamesFixtures
 
-  @create_attrs %{date: %{day: 4, hour: 19, minute: 13, month: 9, year: 2023}, draw: 120.5, location: "some location", lose: 120.5, result: "some result", status: "some status", type: "some type", win: 120.5}
-  @update_attrs %{date: %{day: 5, hour: 19, minute: 13, month: 9, year: 2023}, draw: 456.7, location: "some updated location", lose: 456.7, result: "some updated result", status: "some updated status", type: "some updated type", win: 456.7}
-  @invalid_attrs %{date: %{day: 30, hour: 19, minute: 13, month: 2, year: 2023}, draw: nil, location: nil, lose: nil, result: nil, status: nil, type: nil, win: nil}
+  @create_attrs %{
+    date: %{day: 4, hour: 19, minute: 13, month: 9, year: 2023},
+    draw: 120.5,
+    location: "some location",
+    lose: 120.5,
+    result: "some result",
+    status: "some status",
+    type: "some type",
+    win: 120.5
+  }
+  @update_attrs %{
+    date: %{day: 5, hour: 19, minute: 13, month: 9, year: 2023},
+    draw: 456.7,
+    location: "some updated location",
+    lose: 456.7,
+    result: "some updated result",
+    status: "some updated status",
+    type: "some updated type",
+    win: 456.7
+  }
+  @invalid_attrs %{
+    date: %{day: 30, hour: 19, minute: 13, month: 2, year: 2023},
+    draw: nil,
+    location: nil,
+    lose: nil,
+    result: nil,
+    status: nil,
+    type: nil,
+    win: nil
+  }
 
   defp create_game(_) do
     game = game_fixture()

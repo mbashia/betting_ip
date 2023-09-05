@@ -10,6 +10,7 @@ defmodule BettingSystem.Repo.Migrations.CreateSports do
 
       timestamps()
     end
+
     create index(:sports, [:user_id])
   end
 end

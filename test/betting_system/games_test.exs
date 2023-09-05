@@ -8,7 +8,16 @@ defmodule BettingSystem.GamesTest do
 
     import BettingSystem.GamesFixtures
 
-    @invalid_attrs %{date: nil, draw: nil, location: nil, lose: nil, result: nil, status: nil, type: nil, win: nil}
+    @invalid_attrs %{
+      date: nil,
+      draw: nil,
+      location: nil,
+      lose: nil,
+      result: nil,
+      status: nil,
+      type: nil,
+      win: nil
+    }
 
     test "list_games/0 returns all games" do
       game = game_fixture()
@@ -21,7 +30,16 @@ defmodule BettingSystem.GamesTest do
     end
 
     test "create_game/1 with valid data creates a game" do
-      valid_attrs = %{date: ~N[2023-09-04 19:13:00], draw: 120.5, location: "some location", lose: 120.5, result: "some result", status: "some status", type: "some type", win: 120.5}
+      valid_attrs = %{
+        date: ~N[2023-09-04 19:13:00],
+        draw: 120.5,
+        location: "some location",
+        lose: 120.5,
+        result: "some result",
+        status: "some status",
+        type: "some type",
+        win: 120.5
+      }
 
       assert {:ok, %Game{} = game} = Games.create_game(valid_attrs)
       assert game.date == ~N[2023-09-04 19:13:00]
@@ -40,7 +58,17 @@ defmodule BettingSystem.GamesTest do
 
     test "update_game/2 with valid data updates the game" do
       game = game_fixture()
-      update_attrs = %{date: ~N[2023-09-05 19:13:00], draw: 456.7, location: "some updated location", lose: 456.7, result: "some updated result", status: "some updated status", type: "some updated type", win: 456.7}
+
+      update_attrs = %{
+        date: ~N[2023-09-05 19:13:00],
+        draw: 456.7,
+        location: "some updated location",
+        lose: 456.7,
+        result: "some updated result",
+        status: "some updated status",
+        type: "some updated type",
+        win: 456.7
+      }
 
       assert {:ok, %Game{} = game} = Games.update_game(game, update_attrs)
       assert game.date == ~N[2023-09-05 19:13:00]

@@ -10,15 +10,15 @@
     phx-submit="save">
   
     <%= label f, :name %>
-    <%= text_input f, :name %>
+    <%= select f, :name, ["Football", "Basketball"], prompt: "Select a sport" %>
     <%= error_tag f, :name %>
   
     <%= label f, :description %>
     <%= text_input f, :description %>
     <%= error_tag f, :description %>
 
-     <%= label f, :active %>
-    <%= text_input f, :active %>
+     <%= label f, :status %>
+      <%= select f, :active, ["active", "inactive"], prompt: "set status" %>
     <%= error_tag f, :active %>
   
     <div>

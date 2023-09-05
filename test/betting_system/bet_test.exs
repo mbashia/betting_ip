@@ -21,7 +21,13 @@ defmodule BettingSystem.BetTest do
     end
 
     test "create_bets/1 with valid data creates a bets" do
-      valid_attrs = %{amount: 120.5, odds: 120.5, outcome: "some outcome", payout: 120.5, status: "some status"}
+      valid_attrs = %{
+        amount: 120.5,
+        odds: 120.5,
+        outcome: "some outcome",
+        payout: 120.5,
+        status: "some status"
+      }
 
       assert {:ok, %Bets{} = bets} = Bet.create_bets(valid_attrs)
       assert bets.amount == 120.5
@@ -37,7 +43,14 @@ defmodule BettingSystem.BetTest do
 
     test "update_bets/2 with valid data updates the bets" do
       bets = bets_fixture()
-      update_attrs = %{amount: 456.7, odds: 456.7, outcome: "some updated outcome", payout: 456.7, status: "some updated status"}
+
+      update_attrs = %{
+        amount: 456.7,
+        odds: 456.7,
+        outcome: "some updated outcome",
+        payout: 456.7,
+        status: "some updated status"
+      }
 
       assert {:ok, %Bets{} = bets} = Bet.update_bets(bets, update_attrs)
       assert bets.amount == 456.7

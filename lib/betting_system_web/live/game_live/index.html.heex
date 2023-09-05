@@ -9,6 +9,7 @@
       action={@live_action}
       game={@game}
       user  = {@user}
+      sports = {@sports}
       return_to={Routes.game_index_path(@socket, :index)}
     />
   </.modal>
@@ -32,19 +33,22 @@
   <tbody id="games">
     <%= for game <- @games do %>
       <tr id={"game-#{game.id}"}>
-        <td><%= game.type %></td>
+        <td><%= game.sport.name %></td>
+                <td><%= game.teams %></td>
+
         <td><%= game.date %></td>
         <td><%= game.status %></td>
         <td><%= game.result %></td>
         <td><%= game.location %></td>
-        <td><%= game.win %></td>
-        <td><%= game.draw %></td>
-        <td><%= game.lose %></td>
+        <td> <button><%= game.win %></button></td>
+        <td><button><%= game.draw %></button></td>
+        <td><button><%= game.lose %></button></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.game_show_path(@socket, :show, game) %></span>
           <span><%= live_patch "Edit", to: Routes.game_index_path(@socket, :edit, game) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: game.id, data: [confirm: "Are you sure?"] %></span>
+
         </td>
       </tr>
     <% end %>

@@ -21,7 +21,6 @@ defmodule BettingSystemWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-
   end
 
   # Other scopes may use custom stacks.
@@ -94,9 +93,6 @@ defmodule BettingSystemWeb.Router do
 
     live "/bets/:id", BetsLive.Show, :show
     live "/bets/:id/show/edit", BetsLive.Show, :edit
-
-
-
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

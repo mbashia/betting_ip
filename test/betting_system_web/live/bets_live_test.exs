@@ -4,8 +4,20 @@ defmodule BettingSystemWeb.BetsLiveTest do
   import Phoenix.LiveViewTest
   import BettingSystem.BetFixtures
 
-  @create_attrs %{amount: 120.5, odds: 120.5, outcome: "some outcome", payout: 120.5, status: "some status"}
-  @update_attrs %{amount: 456.7, odds: 456.7, outcome: "some updated outcome", payout: 456.7, status: "some updated status"}
+  @create_attrs %{
+    amount: 120.5,
+    odds: 120.5,
+    outcome: "some outcome",
+    payout: 120.5,
+    status: "some status"
+  }
+  @update_attrs %{
+    amount: 456.7,
+    odds: 456.7,
+    outcome: "some updated outcome",
+    payout: 456.7,
+    status: "some updated status"
+  }
   @invalid_attrs %{amount: nil, odds: nil, outcome: nil, payout: nil, status: nil}
 
   defp create_bets(_) do

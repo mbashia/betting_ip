@@ -18,7 +18,6 @@
   <thead>
     <tr>
       <th>Amount</th>
-      <th>Outcome</th>
       <th>Odds</th>
       <th>Status</th>
       <th>Payout</th>
@@ -30,7 +29,6 @@
     <%= for bets <- @bets_collection do %>
       <tr id={"bets-#{bets.id}"}>
         <td><%= bets.amount %></td>
-        <td><%= bets.outcome %></td>
         <td><%= bets.odds %></td>
         <td><%= bets.status %></td>
         <td><%= bets.payout %></td>

@@ -3,7 +3,8 @@ defmodule BettingSystem.Accounts.User do
   import Ecto.Changeset
   alias BettingSystem.Bet.Bets
   alias BettingSystem.Sports.Sport
-  alias  BettingSystem.Games.Game
+  alias BettingSystem.Games.Game
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true

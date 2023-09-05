@@ -3,7 +3,7 @@ defmodule BettingSystem.Repo.Migrations.CreateGames do
 
   def change do
     create table(:games) do
-      add :type, :string
+      add :sport_id, :integer
       add :date, :naive_datetime
       add :status, :string
       add :result, :string
@@ -11,10 +11,12 @@ defmodule BettingSystem.Repo.Migrations.CreateGames do
       add :win, :float
       add :draw, :float
       add :lose, :float
+      add :teams, :string
       add :user_id, :integer
 
       timestamps()
     end
-    create index(:games, [:user_id])
+
+    create index(:games, [:sport_id])
   end
 end
