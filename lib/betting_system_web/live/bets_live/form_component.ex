@@ -41,7 +41,12 @@ defmodule BettingSystemWeb.BetsLive.FormComponent do
   end
 
   defp save_bets(socket, :new, bets_params) do
-    case Bet.create_bets(bets_params) do
+    IO.inspect(bets_params)
+    new_bet_params =
+    bets_params
+    |>Map.put("user_id", socket.assigns.user.id)
+    IO.inspect(new_bet_params)
+    case Bet.create_bets(new_bet_params) do
       {:ok, _bets} ->
         {:noreply,
          socket

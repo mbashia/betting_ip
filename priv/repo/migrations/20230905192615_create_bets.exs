@@ -8,8 +8,11 @@ defmodule BettingSystem.Repo.Migrations.CreateBets do
       add :odds, :float
       add :status, :string
       add :payout, :float
+      add :user_id, :integer
 
       timestamps()
     end
+    create index(:bets, [:user_id])
+
   end
 end

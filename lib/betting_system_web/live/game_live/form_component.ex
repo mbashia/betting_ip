@@ -41,7 +41,12 @@ defmodule BettingSystemWeb.GameLive.FormComponent do
   end
 
   defp save_game(socket, :new, game_params) do
-    case Games.create_game(game_params) do
+    IO.inspect(game_params)
+    new_game_params =
+    game_params
+    |>Map.put("user_id", socket.assigns.user.id)
+    IO.inspect(new_game_params)
+    case Games.create_game(new_game_params) do
       {:ok, _game} ->
         {:noreply,
          socket

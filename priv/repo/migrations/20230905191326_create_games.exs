@@ -11,8 +11,10 @@ defmodule BettingSystem.Repo.Migrations.CreateGames do
       add :win, :float
       add :draw, :float
       add :lose, :float
+      add :user_id, :integer
 
       timestamps()
     end
+    create index(:games, [:user_id])
   end
 end

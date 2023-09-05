@@ -41,7 +41,11 @@ defmodule BettingSystemWeb.SportLive.FormComponent do
   end
 
   defp save_sport(socket, :new, sport_params) do
-    case Sports.create_sport(sport_params) do
+    new_sport_params =
+    sport_params
+    |>Map.put("user_id", socket.assigns.user.id)
+    IO.inspect(new_sport_params)
+    case Sports.create_sport(new_sport_params) do
       {:ok, _sport} ->
         {:noreply,
          socket
@@ -49,6 +53,7 @@ defmodule BettingSystemWeb.SportLive.FormComponent do
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.write("error")
         {:noreply, assign(socket, changeset: changeset)}
     end
   end

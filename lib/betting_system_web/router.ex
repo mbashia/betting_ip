@@ -21,27 +21,6 @@ defmodule BettingSystemWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-     live "/sports", SportLive.Index, :index
-    live "/sports/new", SportLive.Index, :new
-    live "/sports/:id/edit", SportLive.Index, :edit
-
-    live "/sports/:id", SportLive.Show, :show
-    live "/sports/:id/show/edit", SportLive.Show, :edit
-    live "/games", GameLive.Index, :index
-    live "/games/new", GameLive.Index, :new
-    live "/games/:id/edit", GameLive.Index, :edit
-
-    live "/games/:id", GameLive.Show, :show
-    live "/games/:id/show/edit", GameLive.Show, :edit
-
-    live "/bets", BetsLive.Index, :index
-    live "/bets/new", BetsLive.Index, :new
-    live "/bets/:id/edit", BetsLive.Index, :edit
-
-    live "/bets/:id", BetsLive.Show, :show
-    live "/bets/:id/show/edit", BetsLive.Show, :edit
-
-
 
   end
 
@@ -95,6 +74,29 @@ defmodule BettingSystemWeb.Router do
 
   scope "/", BettingSystemWeb do
     pipe_through [:browser, :require_authenticated_user]
+
+    live "/sports", SportLive.Index, :index
+    live "/sports/new", SportLive.Index, :new
+    live "/sports/:id/edit", SportLive.Index, :edit
+
+    live "/sports/:id", SportLive.Show, :show
+    live "/sports/:id/show/edit", SportLive.Show, :edit
+    live "/games", GameLive.Index, :index
+    live "/games/new", GameLive.Index, :new
+    live "/games/:id/edit", GameLive.Index, :edit
+
+    live "/games/:id", GameLive.Show, :show
+    live "/games/:id/show/edit", GameLive.Show, :edit
+
+    live "/bets", BetsLive.Index, :index
+    live "/bets/new", BetsLive.Index, :new
+    live "/bets/:id/edit", BetsLive.Index, :edit
+
+    live "/bets/:id", BetsLive.Show, :show
+    live "/bets/:id/show/edit", BetsLive.Show, :edit
+
+
+
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

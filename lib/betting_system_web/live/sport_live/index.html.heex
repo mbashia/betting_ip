@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       sport={@sport}
+      user = {@user}
       return_to={Routes.sport_index_path(@socket, :index)}
     />
   </.modal>
@@ -18,6 +19,8 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+            <th>status</th>
+
 
       <th></th>
     </tr>
@@ -27,6 +30,8 @@
       <tr id={"sport-#{sport.id}"}>
         <td><%= sport.name %></td>
         <td><%= sport.description %></td>
+                <td><%= sport.active %></td>
+
 
         <td>
           <span><%= live_redirect "Show", to: Routes.sport_show_path(@socket, :show, sport) %></span>

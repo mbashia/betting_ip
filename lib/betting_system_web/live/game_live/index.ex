@@ -3,10 +3,14 @@ defmodule BettingSystemWeb.GameLive.Index do
 
   alias BettingSystem.Games
   alias BettingSystem.Games.Game
+  alias BettingSystem.Accounts
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :games, list_games())}
+  def mount(_params, session, socket) do
+    user = Accounts.get_user_by_session_token(session["user_token"])
+    {:ok, socket
+  |>assign(:games,list_games())
+  |>assign(:user, user)}
   end
 
   @impl true
