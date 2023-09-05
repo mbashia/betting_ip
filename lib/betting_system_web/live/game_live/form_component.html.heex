@@ -1,0 +1,48 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="game-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+  
+    <%= label f, :type %>
+    <%= text_input f, :type %>
+    <%= error_tag f, :type %>
+  
+    <%= label f, :date %>
+    <%= datetime_select f, :date %>
+    <%= error_tag f, :date %>
+  
+    <%= label f, :status %>
+    <%= text_input f, :status %>
+    <%= error_tag f, :status %>
+  
+    <%= label f, :result %>
+    <%= text_input f, :result %>
+    <%= error_tag f, :result %>
+  
+    <%= label f, :location %>
+    <%= text_input f, :location %>
+    <%= error_tag f, :location %>
+  
+    <%= label f, :win %>
+    <%= number_input f, :win, step: "any" %>
+    <%= error_tag f, :win %>
+  
+    <%= label f, :draw %>
+    <%= number_input f, :draw, step: "any" %>
+    <%= error_tag f, :draw %>
+  
+    <%= label f, :lose %>
+    <%= number_input f, :lose, step: "any" %>
+    <%= error_tag f, :lose %>
+  
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+  </.form>
+</div>
