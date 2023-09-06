@@ -40,9 +40,10 @@
         <td><%= game.status %></td>
         <td><%= game.result %></td>
         <td><%= game.location %></td>
-        <td> <button><%= game.win %></button></td>
-        <td><button><%= game.draw %></button></td>
-        <td><button><%= game.lose %></button></td>
+        <td> <button phx-click ="add bet" phx-value-id={game.id} phx-value-type={"win"}  phx-value-odds={game.win}
+                ><%= game.win %></button></td>
+        <td><button phx-click ="add bet"  phx-value-id={game.id} phx-value-type={"draw"} phx-value-odds={game.draw}><%= game.draw %></button></td>
+        <td><button phx-click ="add bet"  phx-value-id={game.id} phx-value-type={"lose"} phx-value-odds={game.lose}><%= game.lose %></button></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.game_show_path(@socket, :show, game) %></span>

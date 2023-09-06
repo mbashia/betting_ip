@@ -5,6 +5,7 @@ defmodule BettingSystemWeb.GameLive.Index do
   alias BettingSystem.Games.Game
   alias BettingSystem.Accounts
   alias BettingSystem.Sports
+  alias BettingSystem.Betslips
 
   @impl true
   def mount(_params, session, socket) do
@@ -48,6 +49,34 @@ defmodule BettingSystemWeb.GameLive.Index do
 
     {:noreply, assign(socket, :games, list_games())}
   end
+
+  def handle_event("add bet",%{ "odds" =>odds,"id" => id, "type" => type,"value"=> ""}, socket ) do
+game_id = String.to_integer(id)
+IO.inspect(game_id)
+game_odds= String.to_float(odds)
+IO.inspect(game_odds)
+    user_id = socket.assigns.user.id
+    betslip_params = %{
+ "user_id"=>user_id,
+ "game_id" => game_id,
+ "odds"=> game_odds,
+ "status"=> "inactive",
+ "result_type" => type,
+
+
+
+    }
+    case Betslips.create_betslip(betslip_params) do
+      {:ok, _betslip} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Betslip created successfully")
+         |> push_redirect(to: socket.assigns.return_to)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
+    end
 
   defp list_games do
     Games.list_games()
