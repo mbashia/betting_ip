@@ -9,14 +9,14 @@ defmodule BettingSystem.Users do
   end
 
   def change_user(%User{}= user, attrs \\ %{})do
-    User.registration_changeset(user,attrs)
+    User.change_user_changeset(user,attrs)
 
   end
   def get_user!(id), do: Repo.get!(User, id)
 
   def update_user(%User{} = user, attrs) do
     user
-    |> User.registration_changeset(attrs)
+    |> User.change_user_changeset(attrs)
     |> Repo.update()
   end
   def delete_user(%User{} = user) do
