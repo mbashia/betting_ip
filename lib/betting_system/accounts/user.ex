@@ -4,6 +4,7 @@ defmodule BettingSystem.Accounts.User do
   alias BettingSystem.Bet.Bets
   alias BettingSystem.Sports.Sport
   alias BettingSystem.Games.Game
+  alias BettingSystem.Betslips.Betslip
 
   schema "users" do
     field :email, :string
@@ -13,6 +14,7 @@ defmodule BettingSystem.Accounts.User do
     has_many :bets, Bets
     has_many :sports, Sport
     has_many :games, Game
+    has_many :betslips, Betslip
 
     timestamps()
   end

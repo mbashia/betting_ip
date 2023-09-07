@@ -4,10 +4,12 @@ defmodule BettingSystem.Bet.Bets do
   alias BettingSystem.Accounts.User
 
   schema "bets" do
-    field :amount, :float
+    field :amount, :integer
     field :odds, :float
-    field :payout, :float
-    field :status, :string
+    field :payout, :float, default: 0.0
+    field :status, :string, default: "open"
+    field :bet_items, {:map, :integer}
+    field :bet_id, :string
     belongs_to :user, User, foreign_key: :user_id
 
     timestamps()
@@ -16,7 +18,7 @@ defmodule BettingSystem.Bet.Bets do
   @doc false
   def changeset(bets, attrs) do
     bets
-    |> cast(attrs, [:amount,  :odds, :status, :payout, :user_id])
-    |> validate_required([:amount,  :odds, :status, :payout, :user_id])
+    |> cast(attrs, [:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id])
+    |> validate_required([:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id])
   end
 end

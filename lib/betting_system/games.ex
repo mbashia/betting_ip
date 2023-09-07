@@ -19,7 +19,7 @@ defmodule BettingSystem.Games do
   """
   def list_games do
     Repo.all(Game)
-    |>Repo.preload(:sport)
+    |> Repo.preload(:sport)
   end
 
   @doc """

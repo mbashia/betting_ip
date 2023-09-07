@@ -3,11 +3,13 @@ defmodule BettingSystem.Repo.Migrations.CreateBets do
 
   def change do
     create table(:bets) do
-      add :amount, :float
+      add :amount, :integer
       add :odds, :float
-      add :status, :string
-      add :payout, :float
+      add :status, :string, default: "open"
+      add :payout, :float, default: 0.0
       add :user_id, :integer
+      add :bet_items, {:map, :integer}
+      add :bet_id, :string
 
       timestamps()
     end
