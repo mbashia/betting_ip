@@ -35,7 +35,12 @@ defmodule BettingSystem.BetslipsTest do
 
     test "update_betslip/2 with valid data updates the betslip" do
       betslip = betslip_fixture()
-      update_attrs = %{odds: 456.7, result_type: "some updated result_type", status: "some updated status"}
+
+      update_attrs = %{
+        odds: 456.7,
+        result_type: "some updated result_type",
+        status: "some updated status"
+      }
 
       assert {:ok, %Betslip{} = betslip} = Betslips.update_betslip(betslip, update_attrs)
       assert betslip.odds == 456.7

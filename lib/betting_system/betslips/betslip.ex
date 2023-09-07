@@ -7,10 +7,9 @@ defmodule BettingSystem.Betslips.Betslip do
   schema "betslips" do
     field :odds, :float
     field :result_type, :string
-    field :status, :string
+    field :status, :string, default: "in_betslip"
     belongs_to :game, Game, foreign_key: :game_id
     belongs_to :user, User, foreign_key: :user_id
-
 
     timestamps()
   end

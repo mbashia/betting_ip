@@ -5,7 +5,11 @@ defmodule BettingSystemWeb.BetslipLiveTest do
   import BettingSystem.BetslipsFixtures
 
   @create_attrs %{odds: 120.5, result_type: "some result_type", status: "some status"}
-  @update_attrs %{odds: 456.7, result_type: "some updated result_type", status: "some updated status"}
+  @update_attrs %{
+    odds: 456.7,
+    result_type: "some updated result_type",
+    status: "some updated status"
+  }
   @invalid_attrs %{odds: nil, result_type: nil, status: nil}
 
   defp create_betslip(_) do

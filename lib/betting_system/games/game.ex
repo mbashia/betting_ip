@@ -24,7 +24,29 @@ defmodule BettingSystem.Games.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [ :date, :status, :result, :location, :win, :draw, :lose, :user_id, :sport_id, :teams])
-    |> validate_required([ :date, :status, :result, :location, :win, :draw, :lose, :user_id, :sport_id, :teams])
+    |> cast(attrs, [
+      :date,
+      :status,
+      :result,
+      :location,
+      :win,
+      :draw,
+      :lose,
+      :user_id,
+      :sport_id,
+      :teams
+    ])
+    |> validate_required([
+      :date,
+      :status,
+      :result,
+      :location,
+      :win,
+      :draw,
+      :lose,
+      :user_id,
+      :sport_id,
+      :teams
+    ])
   end
 end

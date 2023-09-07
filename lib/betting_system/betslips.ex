@@ -21,6 +21,15 @@ defmodule BettingSystem.Betslips do
     Repo.all(Betslip)
   end
 
+  def get_betslips(id) do
+    Repo.all(from b in Betslip, where: b.user_id == ^id and b.status == "in_betslip")
+    |> Repo.preload(:game)
+  end
+
+  def check_betslip!(id, game_id) do
+    Repo.one(from b in Betslip, where: b.user_id == ^id and b.game_id == ^game_id)
+  end
+
   @doc """
   Gets a single betslip.
 

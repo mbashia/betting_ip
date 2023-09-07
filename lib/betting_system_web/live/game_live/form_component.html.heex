@@ -23,7 +23,7 @@
     <%= error_tag f, :date %>
   
     <%= label f, :status %>
-    <%= text_input f, :status %>
+    <%= select f, :status ,["pending", "completed", "in progress"], prompt: "set status"%>
     <%= error_tag f, :status %>
   
     <%= label f, :result %>
