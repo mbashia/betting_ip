@@ -57,7 +57,6 @@ defmodule BettingSystemWeb.GameLive.Index do
     {:noreply, assign(socket, :games, list_games())}
   end
 
-
   def handle_event(
         "add bet",
         %{"odds" => odds, "id" => game_id, "type" => type, "value" => ""},
@@ -119,15 +118,17 @@ defmodule BettingSystemWeb.GameLive.Index do
       end
     end
   end
-  def handle_event("cancel",%{"cancel" => id},socket)do
+
+  def handle_event("cancel", %{"cancel" => id}, socket) do
     betslip_id = String.to_integer(id)
     betslip = Betslips.get_betslip!(betslip_id)
     {:ok, _} = Betslips.delete_betslip(betslip)
 
-  {:noreply,
-        socket
-        |>assign(:bets,Betslips.get_betslips(socket.assigns.user.id))}
+    {:noreply,
+     socket
+     |> assign(:bets, Betslips.get_betslips(socket.assigns.user.id))}
   end
+
   def handle_event("place bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
     amount = String.to_integer(amount)
     odds = String.to_float(odds)
@@ -162,12 +163,11 @@ defmodule BettingSystemWeb.GameLive.Index do
     IO.inspect(bet_params)
 
     case Bet.create_bets(bet_params) do
-
-
       {:ok, _bets} ->
         for betslips <- betslip_items do
           Betslips.update_betslip(betslips, %{"status" => "out_of_slip"})
         end
+
         {:noreply,
          socket
          |> put_flash(:info, "Bets created successfully")}

@@ -7,47 +7,46 @@
     id="game-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
-    <%= label f, :sport %>
-     <%= select f, :sport_id, @sports, prompt: "Select a sport"%>
-    <%= error_tag f, :sport_id %>
+    phx-submit="save"
+  >
+    <%= label(f, :sport) %>
+    <%= select(f, :sport_id, @sports, prompt: "Select a sport") %>
+    <%= error_tag(f, :sport_id) %>
 
-  
-    <%= label f, :teams %>
-    <%= text_input f, :teams %>
-    <%= error_tag f, :teams %>  
-  
-    <%= label f, :date %>
-    <%= datetime_select f, :date %>
-    <%= error_tag f, :date %>
-  
-    <%= label f, :status %>
-    <%= select f, :status ,["pending", "completed", "in progress"], prompt: "set status"%>
-    <%= error_tag f, :status %>
-  
-    <%= label f, :result %>
-    <%= text_input f, :result %>
-    <%= error_tag f, :result %>
-  
-    <%= label f, :location %>
-    <%= text_input f, :location %>
-    <%= error_tag f, :location %>
-  
-    <%= label f, :win %>
-    <%= number_input f, :win, step: "any" %>
-    <%= error_tag f, :win %>
-  
-    <%= label f, :draw %>
-    <%= number_input f, :draw, step: "any" %>
-    <%= error_tag f, :draw %>
-  
-    <%= label f, :lose %>
-    <%= number_input f, :lose, step: "any" %>
-    <%= error_tag f, :lose %>
-  
+    <%= label(f, :teams) %>
+    <%= text_input(f, :teams) %>
+    <%= error_tag(f, :teams) %>
+
+    <%= label(f, :date) %>
+    <%= datetime_select(f, :date) %>
+    <%= error_tag(f, :date) %>
+
+    <%= label(f, :status) %>
+    <%= select(f, :status, ["pending", "completed", "in progress"], prompt: "set status") %>
+    <%= error_tag(f, :status) %>
+
+    <%= label(f, :result) %>
+    <%= text_input(f, :result) %>
+    <%= error_tag(f, :result) %>
+
+    <%= label(f, :location) %>
+    <%= text_input(f, :location) %>
+    <%= error_tag(f, :location) %>
+
+    <%= label(f, :win) %>
+    <%= number_input(f, :win, step: "any") %>
+    <%= error_tag(f, :win) %>
+
+    <%= label(f, :draw) %>
+    <%= number_input(f, :draw, step: "any") %>
+    <%= error_tag(f, :draw) %>
+
+    <%= label(f, :lose) %>
+    <%= number_input(f, :lose, step: "any") %>
+    <%= error_tag(f, :lose) %>
+
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

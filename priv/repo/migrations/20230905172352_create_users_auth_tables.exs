@@ -7,10 +7,10 @@ defmodule BettingSystem.Repo.Migrations.CreateUsersAuthTables do
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
       add :firstname, :string
-    add :lastname, :string
-    add :status,:string,default: "active"
-    add :role, :string, default: "user"
-    add :phone_number, :integer
+      add :lastname, :string
+      add :status, :string, default: "active"
+      add :role, :string, default: "user"
+      add :phone_number, :integer
       timestamps()
     end
 

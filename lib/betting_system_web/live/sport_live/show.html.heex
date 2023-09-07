@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @sport.name %>
@@ -24,8 +23,9 @@
     <strong>Description:</strong>
     <%= @sport.description %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.sport_show_path(@socket, :edit, @sport), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.sport_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.sport_show_path(@socket, :edit, @sport), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.sport_index_path(@socket, :index)) %></span>

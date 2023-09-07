@@ -8,7 +8,7 @@
       title={@page_title}
       action={@live_action}
       bets={@bets}
-      user = {@user}
+      user={@user}
       return_to={Routes.bets_index_path(@socket, :index)}
     />
   </.modal>
@@ -34,13 +34,22 @@
         <td><%= bets.payout %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.bets_show_path(@socket, :show, bets) %></span>
-          <span><%= live_patch "Edit", to: Routes.bets_index_path(@socket, :edit, bets) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: bets.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.bets_show_path(@socket, :show, bets)) %>
+          </span>
+          <span><%= live_patch("Edit", to: Routes.bets_index_path(@socket, :edit, bets)) %></span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: bets.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Bets", to: Routes.bets_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Bets", to: Routes.bets_index_path(@socket, :new)) %></span>

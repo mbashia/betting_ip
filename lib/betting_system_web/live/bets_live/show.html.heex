@@ -14,13 +14,10 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Amount:</strong>
     <%= @bets.amount %>
   </li>
-
-  
 
   <li>
     <strong>Odds:</strong>
@@ -36,8 +33,9 @@
     <strong>Payout:</strong>
     <%= @bets.payout %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.bets_show_path(@socket, :edit, @bets), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.bets_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.bets_show_path(@socket, :edit, @bets), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.bets_index_path(@socket, :index)) %></span>

@@ -14,12 +14,11 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Type:</strong>
     <%= @game.sport.name %>
   </li>
-<li>
+  <li>
     <strong>Type:</strong>
     <%= @game.teams %>
   </li>
@@ -57,8 +56,9 @@
     <strong>Lose:</strong>
     <%= @game.lose %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.game_show_path(@socket, :edit, @game), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.game_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.game_show_path(@socket, :edit, @game), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.game_index_path(@socket, :index)) %></span>

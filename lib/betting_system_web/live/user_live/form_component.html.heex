@@ -1,0 +1,42 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="user-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save"
+  >
+    <%= label(f, :firstname) %>
+    <%= text_input(f, :firstname)%>
+    <%= error_tag(f, :firstname) %>
+
+     <%= label(f, :lastname) %>
+    <%= text_input(f, :lastname)%>
+    <%= error_tag(f, :lastname) %>
+
+ <%= label(f, :msisdn) %>
+  <%= number_input(f, :phone_number, required: true, placeholder: " enter phone number") %>
+  <%= error_tag(f, :phone_number) %>
+
+
+   <%= label(f, :email) %>
+  <%= email_input(f, :email, required: true) %>
+  <%= error_tag(f, :email) %>
+
+    <%= label(f, :status) %>
+    <%= select(f, :status, ["active", "inactive"]) %>
+    <%= error_tag(f, :status) %>
+
+
+    <%= label(f, :role) %>
+    <%= select(f, :role, ["user","admin", "superadmin"] )%>
+    <%= error_tag(f, :role) %>
+
+    <div>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
+    </div>
+  </.form>
+</div>

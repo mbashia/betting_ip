@@ -8,7 +8,7 @@
       title={@page_title}
       action={@live_action}
       sport={@sport}
-      user = {@user}
+      user={@user}
       return_to={Routes.sport_index_path(@socket, :index)}
     />
   </.modal>
@@ -19,8 +19,7 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-            <th>status</th>
-
+      <th>status</th>
 
       <th></th>
     </tr>
@@ -31,17 +30,27 @@
         <td><%= sport.name %></td>
 
         <td><%= sport.description %></td>
-                <td><%= sport.active %></td>
-
+        <td><%= sport.active %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.sport_show_path(@socket, :show, sport) %></span>
-          <span><%= live_patch "Edit", to: Routes.sport_index_path(@socket, :edit, sport) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: sport.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.sport_show_path(@socket, :show, sport)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.sport_index_path(@socket, :edit, sport)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: sport.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Sport", to: Routes.sport_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Sport", to: Routes.sport_index_path(@socket, :new)) %></span>
