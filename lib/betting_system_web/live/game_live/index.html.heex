@@ -19,13 +19,15 @@
   <thead>
     <tr>
       <th>Type</th>
-      <th>Date</th>
+            <th>Teams</th>
+
+      <th>Date </th>
       <th>Status</th>
       <th>Result</th>
       <th>Location</th>
-      <th>Win</th>
-      <th>Draw</th>
-      <th>Lose</th>
+      <th>1</th>
+      <th>x</th>
+      <th>2</th>
 
       <th></th>
     </tr>
@@ -36,7 +38,7 @@
         <td><%= game.sport.name %></td>
                 <td><%= game.teams %></td>
 
-        <td><%= game.date %></td>
+        <td><%=  NaiveDateTime.to_iso8601(game.date)|>String.replace("T", " ") %></td>
         <td><%= game.status %></td>
         <td><%= game.result %></td>
         <td><%= game.location %></td>
@@ -66,11 +68,16 @@
   total_odds = Enum.map(@bets, & &1.odds) |> Enum.sum()
 %>
  <%= for bet <- @bets do %>
+ <div style = "border:solid;border-color:black;">
  <div> <%= bet.game.teams%></div>
  <div>1X 2</div>
   <div>x<%=bet.odds %> <%= bet.result_type%></div>
 
+  <button phx-click = "cancel" phx-value-cancel = {bet.id}>X
+</button>
+  </div>
  <%end %>
+
 
  <.form
     let={f}

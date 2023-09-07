@@ -57,6 +57,7 @@ defmodule BettingSystemWeb.GameLive.Index do
     {:noreply, assign(socket, :games, list_games())}
   end
 
+
   def handle_event(
         "add bet",
         %{"odds" => odds, "id" => game_id, "type" => type, "value" => ""},
@@ -118,14 +119,22 @@ defmodule BettingSystemWeb.GameLive.Index do
       end
     end
   end
+  def handle_event("cancel",%{"cancel" => id},socket)do
+    betslip_id = String.to_integer(id)
+    betslip = Betslips.get_betslip!(betslip_id)
+    {:ok, _} = Betslips.delete_betslip(betslip)
 
+  {:noreply,
+        socket
+        |>assign(:bets,Betslips.get_betslips(socket.assigns.user.id))}
+  end
   def handle_event("place bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
     amount = String.to_integer(amount)
     odds = String.to_float(odds)
     betslip_items = Betslips.get_betslips(socket.assigns.user.id)
 
     bet_slip_ids_map =
-      Enum.map(betslip_items, fn betslip -> {betslip.id, betslip.id} end) |> Map.new()
+      Enum.map(betslip_items, fn betslip -> {betslip.id, betslip.game_id} end) |> Map.new()
 
     unique_bet_id =
       SecureRandom.base64(socket.assigns.user.id)
@@ -153,7 +162,12 @@ defmodule BettingSystemWeb.GameLive.Index do
     IO.inspect(bet_params)
 
     case Bet.create_bets(bet_params) do
+
+
       {:ok, _bets} ->
+        for betslips <- betslip_items do
+          Betslips.update_betslip(betslips, %{"status" => "out_of_slip"})
+        end
         {:noreply,
          socket
          |> put_flash(:info, "Bets created successfully")}
@@ -165,5 +179,6 @@ defmodule BettingSystemWeb.GameLive.Index do
 
   defp list_games do
     Games.list_games()
+    |> Enum.filter(fn x -> x.status == "pending" end)
   end
 end
