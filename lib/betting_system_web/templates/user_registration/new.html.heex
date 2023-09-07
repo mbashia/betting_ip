@@ -6,7 +6,20 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
+  
+                        <%= label f, :firstname %>
+                        <%= text_input f, :firstname, required: true, placeholder: " firstname" %>
+                        <%= error_tag f, :firstname %>
 
+
+                        <%= label f, :lastname%>
+                        <%= text_input f, :lastname, required: true, placeholder: " lastname" %>
+                        <%= error_tag f, :lastname %>
+
+
+                        <%= label f, :msisdn %>
+                        <%= number_input f, :phone_number, required: true, placeholder: " enter phone number" %>
+                        <%= error_tag f, :phone_number %>
   <%= label f, :email %>
   <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>

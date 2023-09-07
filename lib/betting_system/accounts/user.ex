@@ -10,6 +10,11 @@ defmodule BettingSystem.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
+    field :firstname, :string
+    field :lastname, :string
+    field :status,:string,default: "active"
+    field :role, :string, default: "user"
+    field :phone_number, :integer
     field :confirmed_at, :naive_datetime
     has_many :bets, Bets
     has_many :sports, Sport
@@ -38,7 +43,7 @@ defmodule BettingSystem.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password,:firstname, :lastname,:phone_number])
     |> validate_email()
     |> validate_password(opts)
   end
