@@ -12,7 +12,8 @@ defmodule BettingSystem.Games.Game do
     field :lose, :float
     field :result, :string
     field :status, :string
-    field :teams, :string
+    field :team1, :string
+    field :team2, :string
     # field :type, :string
     field :win, :float
     belongs_to :user, User, foreign_key: :user_id
@@ -34,7 +35,8 @@ defmodule BettingSystem.Games.Game do
       :lose,
       :user_id,
       :sport_id,
-      :teams
+      :team1,
+      :team2
     ])
     |> validate_required([
       :date,
@@ -46,7 +48,8 @@ defmodule BettingSystem.Games.Game do
       :lose,
       :user_id,
       :sport_id,
-      :teams
+      :team1,
+      :team2
     ])
   end
 end

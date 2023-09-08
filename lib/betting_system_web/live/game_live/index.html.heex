@@ -36,7 +36,7 @@
     <%= for game <- @games do %>
       <tr id={"game-#{game.id}"}>
         <td><%= game.sport.name %></td>
-        <td><%= game.teams %></td>
+        <td><%= game.team1 %>vs <%=game.team2%></td>
 
         <td><%= NaiveDateTime.to_iso8601(game.date) |> String.replace("T", " ") %></td>
         <td><%= game.status %></td>
@@ -102,7 +102,7 @@
     <%= total_odds = Enum.map(@bets, & &1.odds) |> Enum.sum() %>
     <%= for bet <- @bets do %>
       <div style="border:solid;border-color:black;">
-        <div><%= bet.game.teams %></div>
+        <div><%= bet.game.team1 %>vs<%= bet.game.team2 %></div>
         <div>1X 2</div>
         <div>x<%= bet.odds %> <%= bet.result_type %></div>
 

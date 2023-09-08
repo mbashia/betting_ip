@@ -13,9 +13,13 @@
     <%= select(f, :sport_id, @sports, prompt: "Select a sport") %>
     <%= error_tag(f, :sport_id) %>
 
-    <%= label(f, :teams) %>
-    <%= text_input(f, :teams) %>
-    <%= error_tag(f, :teams) %>
+    <%= label(f, :team1) %>
+    <%= text_input(f, :team1) %>
+    <%= error_tag(f, :team1) %>
+
+    <%= label(f, :team2) %>
+    <%= text_input(f, :team2) %>
+    <%= error_tag(f, :team2) %>
 
     <%= label(f, :date) %>
     <%= datetime_select(f, :date) %>

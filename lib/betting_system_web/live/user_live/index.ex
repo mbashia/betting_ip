@@ -7,6 +7,8 @@ defmodule BettingSystemWeb.UserLive.Index do
   alias BettingSystem.Accounts
   alias BettingSystem.Repo
 
+
+  @impl true
   def mount(_params, session, socket) do
     user = Accounts.get_user_by_session_token(session["user_token"]) |> Repo.preload(:betslips)
     users = Users.list_users()
@@ -32,6 +34,7 @@ defmodule BettingSystemWeb.UserLive.Index do
     }
   end
 
+  @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
