@@ -8,8 +8,10 @@ defmodule BettingSystem.Repo.Migrations.CreateBetslips do
       add :result_type, :string
       add :game_id, :integer
       add :user_id, :integer
+      add :end_result, :string, default: "nothing"
 
       timestamps()
     end
+
   end
 end

@@ -46,7 +46,7 @@
           <button
             phx-click="add bet"
             phx-value-id={game.id}
-            phx-value-type="win"
+            phx-value-type="team1 win"
             phx-value-odds={game.win}
           >
             <%= game.win %>
@@ -56,7 +56,7 @@
           <button
             phx-click="add bet"
             phx-value-id={game.id}
-            phx-value-type="draw"
+            phx-value-type="game_draw"
             phx-value-odds={game.draw}
           >
             <%= game.draw %>
@@ -66,12 +66,13 @@
           <button
             phx-click="add bet"
             phx-value-id={game.id}
-            phx-value-type="lose"
+            phx-value-type="team2 win"
             phx-value-odds={game.lose}
           >
             <%= game.lose %>
           </button>
         </td>
+<%= if @user.role == "admin" do %>
 
         <td>
           <span>
@@ -87,6 +88,8 @@
             ) %>
           </span>
         </td>
+        <%end %>
+
       </tr>
     <% end %>
   </tbody>

@@ -10,6 +10,7 @@ defmodule BettingSystem.Bet.Bets do
     field :status, :string, default: "open"
     field :bet_items, {:map, :integer}
     field :bet_id, :string
+    field :end_result, :string, default: "nothing"
     belongs_to :user, User, foreign_key: :user_id
 
     timestamps()
@@ -18,8 +19,8 @@ defmodule BettingSystem.Bet.Bets do
   @doc false
   def changeset(bets, attrs) do
     bets
-    |> cast(attrs, [:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id])
-    |> validate_required([:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id])
+    |> cast(attrs, [:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id, :end_result])
+    |> validate_required([:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id, :end_result])
 
     # |> validate_amount_is_integer()
   end

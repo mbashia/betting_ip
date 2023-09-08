@@ -33,6 +33,10 @@ defmodule BettingSystem.Betslips do
     Repo.all(from b in Betslip, where: b.user_id == ^id )
     |> Repo.preload(:game)
   end
+  def get_betslip_by_game_id(game_id)do
+    
+  end
+
   # def get_betslip_by_game_id(id, game_id)do
   #   Repo.one(from b in Betslip, where: b.user_id == ^id and b.game_id == ^game_id)
 

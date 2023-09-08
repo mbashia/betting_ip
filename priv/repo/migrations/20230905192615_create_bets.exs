@@ -9,6 +9,7 @@ defmodule BettingSystem.Repo.Migrations.CreateBets do
       add :payout, :float, default: 0.0
       add :user_id, :integer
       add :bet_items, {:map, :integer}
+      add :end_result, :string, default: "nothing"
       add :bet_id, :string
 
       timestamps()
