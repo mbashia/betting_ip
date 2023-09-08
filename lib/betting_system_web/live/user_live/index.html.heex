@@ -1,68 +1,97 @@
-<div>
+<%= if @current_user.role == "admin" do %>
+  <div>
+    <h1>Listing users</h1>
 
+    <%= if @live_action in [ :edit] do %>
+      <.modal return_to={Routes.user_index_path(@socket, :index)}>
+        <.live_component
+          module={BettingSystemWeb.UserLive.FormComponent}
+          id={@user.id || :new}
+          title={@page_title}
+          action={@live_action}
+          user={@user}
+          return_to={Routes.user_index_path(@socket, :index)}
+        />
+      </.modal>
+    <% end %>
 
+    <table>
+      <thead>
+        <tr>
+          <th>firstname</th>
+          <th>second name</th>
+          <th>msisdn</th>
+          <th>role</th>
 
-<h1>Listing users</h1>
+          <th>status</th>
+          <th>actions</th>
 
-<%= if @live_action in [ :edit] do %>
-  <.modal return_to={Routes.user_index_path(@socket, :index)}>
-    <.live_component
-      module={BettingSystemWeb.UserLive.FormComponent}
-      id={@user.id || :new}
-      title={@page_title}
-      action={@live_action}
-      user  = {@user}
-      
-      return_to={Routes.user_index_path(@socket, :index)}
-    />
-  </.modal>
-<% end %>
-
-
-
-  <table>
-    <thead>
-      <tr>
-        <th>firstname</th>
-        <th>second name</th>
-        <th>msisdn</th>
-        <th>role</th>
-
-        <th>status</th>
-        <th>actions</th>
-
-        <th></th>
-      </tr>
-    </thead>
-    <tbody id="sports">
-      <%= for user <- @users do %>
-        <tr id={"sport-#{user.id}"}>
-          <td><%= user.firstname %></td>
-
-          <td><%= user.lastname %></td>
-          <td><%= user.phone_number %></td>
-          <td><%= user.role %></td>
-
-          <td><%= user.status %></td>
-
-          <td>
-            <span>
-              <%= live_redirect("Show", to: Routes.sport_show_path(@socket, :show, user)) %>
-            </span>
-            <span>
-              <%= live_patch("Edit", to: Routes.user_index_path(@socket, :edit, user)) %>
-            </span>
-            <span>
-              <%= link("Delete",
-                to: "#",
-                phx_click: "delete",
-                phx_value_id: user.id,
-                data: [confirm: "Are you sure?"]
-              ) %>
-            </span>
-          </td>
+          <th></th>
         </tr>
+      </thead>
+      <tbody id="sports">
+        <%= for user <- @users do %>
+          <tr id={"sport-#{user.id}"}>
+            <td><%= user.firstname %></td>
+
+            <td><%= user.lastname %></td>
+            <td><%= user.phone_number %></td>
+            <td><%= user.role %></td>
+
+            <td><%= user.status %></td>
+
+            <td>
+              <span>
+                <%= live_redirect("Show", to: Routes.user_show_path(@socket, :show, user)) %>
+              </span>
+              <span>
+                <%= live_patch("Edit", to: Routes.user_index_path(@socket, :edit, user)) %>
+              </span>
+              <%=if user.status == "inactive" do%>
+              <span>
+                <%= link("activate",
+                  to: "#",
+                  phx_click: "delete",
+                  phx_value_id: user.id,
+                  data: [confirm: "Are you sure?"]
+                ) %>
+              </span>
+              <%else %>
+              <span>
+                <%= link("deactivate",
+                  to: "#",
+                  phx_click: "delete",
+                  phx_value_id: user.id,
+                  data: [confirm: "Are you sure?"]
+                ) %>
+              </span>
+              <%end %>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div>
+    <p><%= @current_user.firstname %></p>
+    <p><%= @current_user.lastname %></p>
+
+    <p><%= @current_user.phone_number %></p>
+
+    <p><%= @current_user.email %></p>
+
+    <p><%= @current_user.status %></p>
+
+    <button phx-click="bet history">bet history</button>
+    <%= if @check_bet_history == 1 do %>
+      <p>you have <%= length(@bets) %> bets</p>
+      <%= for bet <- @bets do %>
+        <p>bet id: <%= bet.bet_id %></p>
       <% end %>
-    </tbody>
-  </table>
-</div>
+    <% else %>
+      <div></div>
+    <% end %>
+  </div>
+<% end %>

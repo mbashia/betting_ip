@@ -20,5 +20,16 @@ defmodule BettingSystem.Bet.Bets do
     bets
     |> cast(attrs, [:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id])
     |> validate_required([:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id])
+
+    # |> validate_amount_is_integer()
   end
+
+  # defp validate_amount_is_integer(changeset) do
+  #   case get_field(changeset, :amount) do
+  #     %Decimal{} ->
+  #       add_error(changeset, :amount, "Amount must be an integer")
+  #     _ ->
+  #       changeset
+  #   end
+  # end
 end

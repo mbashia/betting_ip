@@ -107,6 +107,7 @@ defmodule BettingSystemWeb.GameLive.Index do
       case Betslips.update_betslip(betslip, betslip_params) do
         {:ok, _betslip} ->
           selected_bets = Betslips.get_betslips(socket.assigns.user.id)
+          IO.inspect(selected_bets)
 
           {:noreply,
            socket
@@ -129,14 +130,27 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:bets, Betslips.get_betslips(socket.assigns.user.id))}
   end
 
+  #   def handle_event("validate_amount", %{"bets" => bets_params}, socket) do
+  # IO.inspect(bets_params)
+
+  #     changeset =
+  #       socket.assigns.bets
+  #       |> Bet.change_bets(bets_params["amount"])
+  #       |> Map.put(:action, :validate)
+
+  #     {:noreply, assign(socket, :changeset, changeset)}
+  #   end
+
   def handle_event("place bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
     amount = String.to_integer(amount)
     odds = String.to_float(odds)
     betslip_items = Betslips.get_betslips(socket.assigns.user.id)
 
     bet_slip_ids_map =
-      Enum.map(betslip_items, fn betslip -> {betslip.id, betslip.game_id} end) |> Map.new()
+      Enum.map(betslip_items, fn betslip -> {betslip.game_id, betslip.game_id} end) |> Map.new()
 
+    # bet_slip_ids_list =
+    # Enum.map(betslip_items, fn betslip -> betslip.game_id end)
     unique_bet_id =
       SecureRandom.base64(socket.assigns.user.id)
       |> String.replace("==", "")
@@ -168,9 +182,12 @@ defmodule BettingSystemWeb.GameLive.Index do
           Betslips.update_betslip(betslips, %{"status" => "out_of_slip"})
         end
 
+        selected_bets = Betslips.get_betslips(socket.assigns.user.id)
+
         {:noreply,
          socket
-         |> put_flash(:info, "Bets created successfully")}
+         |> put_flash(:info, "Bets created successfully")
+         |> assign(:bets, selected_bets)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

@@ -63,8 +63,10 @@ defmodule BettingSystemWeb.Router do
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
+
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
+
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
@@ -81,6 +83,8 @@ defmodule BettingSystemWeb.Router do
     live "/users", UserLive.Index, :index
     live "/users/new", UserLive.Index, :new
     live "/users/:id/edit", UserLive.Index, :edit
+    live "/users/:id", UserLive.Show, :show
+
 
     live "/sports/:id", SportLive.Show, :show
     live "/sports/:id/show/edit", SportLive.Show, :edit
@@ -111,6 +115,8 @@ defmodule BettingSystemWeb.Router do
 
   scope "/", BettingSystemWeb do
     pipe_through [:browser]
+
+
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new

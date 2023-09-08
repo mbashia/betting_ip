@@ -32,5 +32,6 @@
 
 <span>
   <%= live_patch("Edit", to: Routes.betslip_show_path(@socket, :edit, @betslip), class: "button") %>
-</span> |
+</span>
+|
 <span><%= live_redirect("Back", to: Routes.betslip_index_path(@socket, :index)) %></span>

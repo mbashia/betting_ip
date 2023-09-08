@@ -91,8 +91,9 @@
     <% end %>
   </tbody>
 </table>
-
+<%= if @user.role == "admin" do %>
 <span><%= live_patch("New Game", to: Routes.game_index_path(@socket, :new)) %></span>
+<%end %>
 <div>
   <h4>bet slips</h4>
   <%= if @bets == "" do %>

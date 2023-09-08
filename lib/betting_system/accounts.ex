@@ -333,7 +333,7 @@ defmodule BettingSystem.Accounts do
 
   ## Examples
 
-      iex> reset_user_password(user, %{password: "new long password", password_confirmation: "new long password"})
+      iex> reset_user_password(user, %{password: "new  password", password_confirmation: "new long password"})
       {:ok, %User{}}
 
       iex> reset_user_password(user, %{password: "valid", password_confirmation: "not the same"})

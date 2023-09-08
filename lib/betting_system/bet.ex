@@ -17,6 +17,11 @@ defmodule BettingSystem.Bet do
       [%Bets{}, ...]
 
   """
+
+  def get_all_bets(id) do
+    Repo.all(from b in Bets, where: b.user_id == ^id)
+  end
+
   def list_bets do
     Repo.all(Bets)
   end
