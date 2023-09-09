@@ -36,7 +36,7 @@ defmodule BettingSystemWeb.UserAuth do
     |> redirect(to: user_return_to || signed_in_path(conn))
   end
 
-  def new_user_login(conn, user, params \\ %{}) do
+  def new_user_login(conn, _user, _params \\ %{}) do
     # token = Accounts.generate_user_session_token(user)
 
     conn
