@@ -140,72 +140,33 @@ defmodule BettingSystemWeb.UserLive.Index do
     # this code from here  i cant rembember i was in the zone and it might not be working check later
     user_bets = Bet.get_all_bets(socket.assigns.current_user.id)
 
-Enum.each(user_bets, fn bet ->
-  game_ids = Map.values(bet.bet_items)
+    Enum.each(user_bets, fn bet ->
+      game_ids = Map.values(bet.bet_items)
 
-  bet_status =
-    Enum.reduce(game_ids, :win, fn x, acc ->
-      IO.write("Checking betslip for game ID #{x}")
-      betslip = Betslips.check_betslip!(socket.assigns.current_user.id, x)
+      bet_status =
+        Enum.reduce(game_ids, :win, fn x, acc ->
+          IO.write("Checking betslip for game ID #{x}")
+          betslip = Betslips.check_betslip!(socket.assigns.current_user.id, x)
 
-      case betslip.end_result do
-        "won" -> acc
-        "lost" -> :lost
-        _ -> :false
+          case betslip.end_result do
+            "won" -> acc
+            "lost" -> :lost
+            _ -> false
+          end
+        end)
+
+      case bet_status do
+        :win ->
+          Bet.update_bets(bet, %{"end_result" => "win", "status" => "closed"})
+
+        :lost ->
+          Bet.update_bets(bet, %{"end_result" => "lost", "status" => "closed"})
+
+        false ->
+          Bet.update_bets(bet, %{"end_result" => "null", "status" => "closed"})
       end
     end)
 
-  case bet_status do
-    :win ->
-      Bet.update_bets(bet, %{"end_result" => "win","status" => "closed"})
-    :lost ->
-      Bet.update_bets(bet, %{"end_result" => "lost","status" => "closed"})
-    :false ->
-      Bet.update_bets(bet, %{"end_result" => "null","status" => "closed"})
-  end
-end)
-    #       Enum.each(game_ids, fn x ->
-    #         IO.write("im here")
-    #         betslip = Betslips.check_betslip!(socket.assigns.current_user.id, game_id)
-
-    #         case betslip.end_result do
-    #           "lost" ->
-    #             case Bet.update_bets(bet, %{"end_result" => "lost"}) do
-    #               {:ok, _bets} ->
-    #                 {:noreply,
-    #                  socket
-    #                  |> put_flash(:info, "Bets updated successfully")}
-
-    #               {:error, %Ecto.Changeset{} = changeset} ->
-    #                 IO.write("error while updating lost")
-    #                 {:noreply, assign(socket, :changeset, changeset)}
-    #             end
-
-    #           "won" ->
-    #             case Bet.update_bets(bet, %{"end_result" => "won"}) do
-    #               {:ok, _bets} ->
-    #                 {:noreply,
-    #                  socket
-    #                  |> put_flash(:info, "Bets updated successfully")}
-
-    #               {:error, %Ecto.Changeset{} = changeset} ->
-    #                 IO.write("error while updating won")
-    #                 {:noreply, assign(socket, :changeset, changeset)}
-    #             end
-    #         end
-    #       end)
-    #     end)
-    # end
-
-    # # case {game.result, betslip.result} do
-    # #   {game_result, betslip_result} when game_result == betslip_result ->
-    # #     IO.puts "Bet slip #{betslip.id} matches the game result."
-    # #     # Perform actions for a successful match (x)
-
-    # #   _ ->
-    # #     IO.puts "Bet slip #{betslip.id} does not match the game result."
-    # #     # Perform actions for a mismatch (y)
-    # # end
 
     {:noreply, socket}
   end

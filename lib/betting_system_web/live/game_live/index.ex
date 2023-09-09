@@ -154,6 +154,8 @@ defmodule BettingSystemWeb.GameLive.Index do
     unique_bet_id =
       SecureRandom.base64(socket.assigns.user.id)
       |> String.replace("==", "")
+      |> String.replace("=", "")
+      |> String.replace("/", "mbash")
 
     timestamp = DateTime.utc_now() |> DateTime.to_unix(:second) |> Integer.to_string()
 
