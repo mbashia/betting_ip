@@ -20,7 +20,16 @@ defmodule BettingSystem.Bet.Bets do
   def changeset(bets, attrs) do
     bets
     |> cast(attrs, [:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id, :end_result])
-    |> validate_required([:amount, :odds, :status, :payout, :user_id, :bet_items, :bet_id, :end_result])
+    |> validate_required([
+      :amount,
+      :odds,
+      :status,
+      :payout,
+      :user_id,
+      :bet_items,
+      :bet_id,
+      :end_result
+    ])
 
     # |> validate_amount_is_integer()
   end

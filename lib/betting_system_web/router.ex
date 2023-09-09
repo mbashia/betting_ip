@@ -85,7 +85,6 @@ defmodule BettingSystemWeb.Router do
     live "/users/:id/edit", UserLive.Index, :edit
     live "/users/:id", UserLive.Show, :show
 
-
     live "/sports/:id", SportLive.Show, :show
     live "/sports/:id/show/edit", SportLive.Show, :edit
     live "/games", GameLive.Index, :index
@@ -115,8 +114,6 @@ defmodule BettingSystemWeb.Router do
 
   scope "/", BettingSystemWeb do
     pipe_through [:browser]
-
-
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new

@@ -21,10 +21,11 @@ defmodule BettingSystem.Games do
     Repo.all(Game)
     |> Repo.preload(:sport)
   end
-def list_pending_games()do
-  Repo.all(from g in Game, where: g.status == "pending")
 
-end
+  def list_pending_games() do
+    Repo.all(from g in Game, where: g.status == "pending")
+  end
+
   @doc """
   Gets a single game.
 

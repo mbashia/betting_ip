@@ -47,26 +47,25 @@
               <span>
                 <%= live_patch("Edit", to: Routes.user_index_path(@socket, :edit, user)) %>
               </span>
-              <%=if user.status == "inactive" do%>
-              <span>
-                <%= link("activate",
-                  to: "#",
-                  phx_click: "delete",
-                  phx_value_id: user.id,
-                  data: [confirm: "Are you sure?"]
-                ) %>
-              </span>
-              <%else %>
-              <span>
-                <%= link("deactivate",
-                  to: "#",
-                  phx_click: "delete",
-                  phx_value_id: user.id,
-                  data: [confirm: "Are you sure?"]
-                ) %>
-              </span>
-              <%end %>
-
+              <%= if user.status == "inactive" do %>
+                <span>
+                  <%= link("activate",
+                    to: "#",
+                    phx_click: "delete",
+                    phx_value_id: user.id,
+                    data: [confirm: "Are you sure?"]
+                  ) %>
+                </span>
+              <% else %>
+                <span>
+                  <%= link("deactivate",
+                    to: "#",
+                    phx_click: "delete",
+                    phx_value_id: user.id,
+                    data: [confirm: "Are you sure?"]
+                  ) %>
+                </span>
+              <% end %>
             </td>
           </tr>
         <% end %>

@@ -12,6 +12,5 @@ defmodule BettingSystem.Repo.Migrations.CreateBetslips do
 
       timestamps()
     end
-
   end
 end

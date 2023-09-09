@@ -36,7 +36,7 @@
     <%= for game <- @games do %>
       <tr id={"game-#{game.id}"}>
         <td><%= game.sport.name %></td>
-        <td><%= game.team1 %>vs <%=game.team2%></td>
+        <td><%= game.team1 %>vs <%= game.team2 %></td>
 
         <td><%= NaiveDateTime.to_iso8601(game.date) |> String.replace("T", " ") %></td>
         <td><%= game.status %></td>
@@ -72,31 +72,31 @@
             <%= game.lose %>
           </button>
         </td>
-<%= if @user.role == "admin" do %>
-
-        <td>
-          <span>
-            <%= live_redirect("Show", to: Routes.game_show_path(@socket, :show, game)) %>
-          </span>
-          <span><%= live_patch("Edit", to: Routes.game_index_path(@socket, :edit, game)) %></span>
-          <span>
-            <%= link("Delete",
-              to: "#",
-              phx_click: "delete",
-              phx_value_id: game.id,
-              data: [confirm: "Are you sure?"]
-            ) %>
-          </span>
-        </td>
-        <%end %>
-
+        <%= if @user.role == "admin" do %>
+          <td>
+            <span>
+              <%= live_redirect("Show", to: Routes.game_show_path(@socket, :show, game)) %>
+            </span>
+            <span>
+              <%= live_patch("Edit", to: Routes.game_index_path(@socket, :edit, game)) %>
+            </span>
+            <span>
+              <%= link("Delete",
+                to: "#",
+                phx_click: "delete",
+                phx_value_id: game.id,
+                data: [confirm: "Are you sure?"]
+              ) %>
+            </span>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <%= if @user.role == "admin" do %>
-<span><%= live_patch("New Game", to: Routes.game_index_path(@socket, :new)) %></span>
-<%end %>
+  <span><%= live_patch("New Game", to: Routes.game_index_path(@socket, :new)) %></span>
+<% end %>
 <div>
   <h4>bet slips</h4>
   <%= if @bets == "" do %>

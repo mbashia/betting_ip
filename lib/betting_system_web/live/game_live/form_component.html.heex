@@ -30,7 +30,9 @@
     <%= error_tag(f, :status) %>
 
     <%= label(f, :result) %>
-    <%= select(f, :result,["pending", "team1 win","game_draw", "team2 win"], prompt: "set result") %>
+    <%= select(f, :result, ["pending", "team1 win", "game_draw", "team2 win"],
+      prompt: "set result"
+    ) %>
     <%= error_tag(f, :result) %>
 
     <%= label(f, :location) %>

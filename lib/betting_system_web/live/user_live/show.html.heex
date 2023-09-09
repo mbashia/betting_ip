@@ -1,6 +1,6 @@
 <div>
-<p>games placed </p>
-<%=for bet <- @betslips do %>
-<div><%=bet.game.team1%>vs<%=bet.game.team2%></div>
-<%end %>
+  <p>games placed</p>
+  <%= for bet <- @betslips do %>
+    <div><%= bet.game.team1 %>vs<%= bet.game.team2 %></div>
+  <% end %>
 </div>

@@ -23,6 +23,4 @@ defmodule BettingSystem.Users do
   def delete_user(%User{} = user) do
     Repo.delete(user)
   end
-
-
 end
