@@ -76,4 +76,30 @@ defmodule BettingSystem.Accounts.UserNotifier do
     ==============================
     """)
   end
+  def bet_win_results_email(bet, user)do
+
+    deliver(user.email, "you bets result", """
+
+    ==============================
+
+    habari yako #{user.email},
+
+    Tunataka kukuarifu kuwa lile bet lako #{bet.bet_id} umeshinda bet hilo
+    enda kwenye website kupata malipo yako
+    ==============================
+    """)
+  end
+  def bet_loss_results_email(bet, user)do
+
+    deliver(user.email, "you bets result", """
+
+    ==============================
+
+    habari yako #{user.email},
+
+    Tunataka kukuarifu kuwa lile bet lako #{bet.bet_id} umefeli bet hilo
+    jaribu tena next time si rahisi lakini mvumilivu hula mbivu
+    ==============================
+    """)
+  end
 end

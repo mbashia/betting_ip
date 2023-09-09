@@ -8,7 +8,7 @@ defmodule BettingSystemWeb.UserLive.Index do
   alias BettingSystem.Repo
   alias BettingSystem.Games
   alias BettingSystem.Betslips
-
+  alias BettingSystem.Accounts.UserNotifier
   @impl true
   def mount(_params, session, socket) do
     :timer.send_interval(20000, self(), :update_games)
@@ -113,7 +113,7 @@ defmodule BettingSystemWeb.UserLive.Index do
     Enum.each(pending_games, fn game ->
       random_result = Enum.random(["team1 win", "game_draw", "team2 win"])
 
-      random_updates = %{"status" => "completed", "result" => "team1 win"}
+      random_updates = %{"status" => "completed", "result" =>random_result}
       Games.update_game(game, random_updates)
     end)
 
@@ -158,9 +158,10 @@ defmodule BettingSystemWeb.UserLive.Index do
       case bet_status do
         :win ->
           Bet.update_bets(bet, %{"end_result" => "win", "status" => "closed"})
-
+          UserNotifier.bet_win_results_email(bet,socket.assigns.current_user)
         :lost ->
           Bet.update_bets(bet, %{"end_result" => "lost", "status" => "closed"})
+          UserNotifier.bet_loss_results_email(bet,socket.assigns.current_user)
 
         false ->
           Bet.update_bets(bet, %{"end_result" => "null", "status" => "closed"})
