@@ -31,7 +31,7 @@ defmodule BettingSystemWeb.UserLive.Index do
     {:ok,
      socket
      |> assign(:users, users)
-     |> assign(:current_user, user)
+     |> assign(:user, user)
      |> assign(:check_bet_history, 0)
      |> assign(:bets, user_bets)}
   end
@@ -112,11 +112,11 @@ defmodule BettingSystemWeb.UserLive.Index do
     Enum.each(pending_games, fn game ->
       random_result = Enum.random(["team1 win", "game_draw", "team2 win"])
 
-      random_updates = %{"status" => "completed", "result" =>random_result}
+      random_updates = %{"status" => "completed", "result" => random_result}
       Games.update_game(game, random_updates)
     end)
 
-    user_betslips = Betslips.get_betslip_user_id(socket.assigns.current_user.id)
+    user_betslips = Betslips.get_betslip_user_id(socket.assigns.user.id)
 
     Enum.each(user_betslips, fn betslip ->
       game_id = betslip.game_id
@@ -136,7 +136,7 @@ defmodule BettingSystemWeb.UserLive.Index do
     end)
 
     # this code from here  i cant rembember i was in the zone and it might not be working check later
-    user_bets = Bet.get_all_bets(socket.assigns.current_user.id)
+    user_bets = Bet.get_all_bets(socket.assigns.user.id)
 
     Enum.each(user_bets, fn bet ->
       game_ids = Map.values(bet.bet_items)
@@ -144,9 +144,10 @@ defmodule BettingSystemWeb.UserLive.Index do
       bet_status =
         Enum.reduce(game_ids, :win, fn x, acc ->
           IO.write("Checking betslip for game ID #{x}")
-          betslip = Betslips.getting_betslip(socket.assigns.current_user.id, x)
+          betslip = Betslips.getting_betslip(socket.assigns.user.id, x)
           IO.inspect(betslip)
           IO.write("above inspected betslip")
+
           case betslip.end_result do
             "won" -> acc
             "lost" -> :lost
@@ -157,16 +158,16 @@ defmodule BettingSystemWeb.UserLive.Index do
       case bet_status do
         :win ->
           Bet.update_bets(bet, %{"end_result" => "win", "status" => "closed"})
-          UserNotifier.bet_win_results_email(bet,socket.assigns.current_user)
+          UserNotifier.bet_win_results_email(bet, socket.assigns.user)
+
         :lost ->
           Bet.update_bets(bet, %{"end_result" => "lost", "status" => "closed"})
-          UserNotifier.bet_loss_results_email(bet,socket.assigns.current_user)
+          UserNotifier.bet_loss_results_email(bet, socket.assigns.user)
 
         false ->
           Bet.update_bets(bet, %{"end_result" => "null", "status" => "closed"})
       end
     end)
-
 
     {:noreply, socket}
   end

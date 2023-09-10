@@ -1,4 +1,4 @@
-<%= if @current_user.role == "admin" do %>
+<%= if @user.role == "admin" do %>
   <div>
     <h1>Listing users</h1>
 
@@ -74,14 +74,14 @@
   </div>
 <% else %>
   <div>
-    <p><%= @current_user.firstname %></p>
-    <p><%= @current_user.lastname %></p>
+    <p><%= @user.firstname %></p>
+    <p><%= @user.lastname %></p>
 
-    <p><%= @current_user.phone_number %></p>
+    <p><%= @user.phone_number %></p>
 
-    <p><%= @current_user.email %></p>
+    <p><%= @user.email %></p>
 
-    <p><%= @current_user.status %></p>
+    <p><%= @user.status %></p>
 
     <button phx-click="bet history">bet history</button>
     <%= if @check_bet_history == 1 do %>

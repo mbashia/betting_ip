@@ -76,8 +76,8 @@ defmodule BettingSystem.Accounts.UserNotifier do
     ==============================
     """)
   end
-  def bet_win_results_email(bet, user)do
 
+  def bet_win_results_email(bet, user) do
     deliver(user.email, "you bets result", """
 
     ==============================
@@ -89,8 +89,8 @@ defmodule BettingSystem.Accounts.UserNotifier do
     ==============================
     """)
   end
-  def bet_loss_results_email(bet, user)do
 
+  def bet_loss_results_email(bet, user) do
     deliver(user.email, "you bets result", """
 
     ==============================
