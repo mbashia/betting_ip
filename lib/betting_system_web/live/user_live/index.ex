@@ -108,7 +108,6 @@ defmodule BettingSystemWeb.UserLive.Index do
 
   def handle_info(:update_games, socket) do
     pending_games = Games.list_pending_games()
-    IO.inspect(pending_games)
 
     Enum.each(pending_games, fn game ->
       random_result = Enum.random(["team1 win", "game_draw", "team2 win"])
@@ -118,7 +117,6 @@ defmodule BettingSystemWeb.UserLive.Index do
     end)
 
     user_betslips = Betslips.get_betslip_user_id(socket.assigns.current_user.id)
-    IO.inspect(user_betslips)
 
     Enum.each(user_betslips, fn betslip ->
       game_id = betslip.game_id
@@ -146,8 +144,9 @@ defmodule BettingSystemWeb.UserLive.Index do
       bet_status =
         Enum.reduce(game_ids, :win, fn x, acc ->
           IO.write("Checking betslip for game ID #{x}")
-          betslip = Betslips.check_betslip!(socket.assigns.current_user.id, x)
-
+          betslip = Betslips.getting_betslip(socket.assigns.current_user.id, x)
+          IO.inspect(betslip)
+          IO.write("above inspected betslip")
           case betslip.end_result do
             "won" -> acc
             "lost" -> :lost
