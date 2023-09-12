@@ -15,8 +15,28 @@
     >
     </script>
   </head>
-  <body>
-    <%= render("_user_menu.html", assigns) %>
+  <body class = "bg-[#202a39]">
+
+
+  <nav class = "flex justify-between text-white p-[30px]">
+  <div class = ""> 
+  <p class = "text-xl font-semibold poppins-bold">SportOdds</p>
+</div>
+  <div class = "poppins"> 
+  <a  class = "m-2" href = "#">live</a>
+    <a class = "m-2"  href = "#">betting</a>
+
+  <a class = "m-2"  href = "#"> casion</a>
+
+  <a class = "m-2"  href = "#"> lucky Drops</a>
+
+  <a class = "m-2"  href = "#">live casino</a>
+    <a  class = "m-2" href = "#">live promotions</a></div>
+ 
+<div>     <%= render("_user_menu.html", assigns) %>
+</div>
+
+  </nav>
 
     <%= @inner_content %>
   </body>
