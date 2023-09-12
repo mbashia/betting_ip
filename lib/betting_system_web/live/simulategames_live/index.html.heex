@@ -1,0 +1,59 @@
+<div>
+  <p style="color:red;">
+    <%= @pending_error %>
+  </p>
+  <button phx-click="simulate">simulate games</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Teams</th>
+
+        <th>Date</th>
+        <th>Status</th>
+        <th>Result</th>
+        <th>Location</th>
+        <th>1</th>
+        <th>x</th>
+        <th>2</th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="games">
+      <%= for game <- @games do %>
+        <tr id={"game-#{game.id}"}>
+          <td><%= game.sport.name %></td>
+          <td><%= game.team1 %>vs <%= game.team2 %></td>
+
+          <td><%= NaiveDateTime.to_iso8601(game.date) |> String.replace("T", " ") %></td>
+          <%= if game.status == "pending"  do %>
+            <td style="background-color:red;"><%= game.status %></td>
+          <% else %>
+            <td style="background-color:green;"><%= game.status %></td>
+          <% end %>
+          <td><%= game.result %></td>
+          <td><%= game.location %></td>
+          <td>
+            <button>
+              <%= game.win %>
+            </button>
+          </td>
+          <td>
+            <button>
+              <%= game.draw %>
+            </button>
+          </td>
+          <td>
+            <button>
+              <%= game.lose %>
+            </button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <button phx-click="simulate">simulate games</button>
+</div>

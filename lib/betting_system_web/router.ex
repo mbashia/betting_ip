@@ -77,6 +77,8 @@ defmodule BettingSystemWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live "/sports", SportLive.Index, :index
+    live "/simulate", SimulategamesLive.Index, :index
+
     live "/sports/new", SportLive.Index, :new
     live "/sports/:id/edit", SportLive.Index, :edit
 

@@ -107,15 +107,6 @@ defmodule BettingSystemWeb.UserLive.Index do
   end
 
   def handle_info(:update_games, socket) do
-    pending_games = Games.list_pending_games()
-
-    Enum.each(pending_games, fn game ->
-      random_result = Enum.random(["team1 win", "game_draw", "team2 win"])
-
-      random_updates = %{"status" => "completed", "result" => random_result}
-      Games.update_game(game, random_updates)
-    end)
-
     user_betslips = Betslips.get_betslip_user_id(socket.assigns.user.id)
 
     Enum.each(user_betslips, fn betslip ->

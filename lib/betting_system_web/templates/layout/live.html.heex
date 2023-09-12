@@ -18,28 +18,34 @@
     width: 160px; height:100%; ">
     <div style="display:flex; flex-direction:column; width:200px">
       <div style="margin:20px; padding:2px; color:blue;">dashboard</div>
+      <%= if @user.role == "admin" || @user.role == "superadmin" do %>
 
       <div style="margin:20px; padding:2px; color:blue;">
-        <span><%= live_patch(" sports", to: Routes.sport_index_path(@socket, :index)) %></span>
+        <span><%= live_redirect(" sports", to: Routes.sport_index_path(@socket, :index)) %></span>
       </div>
+      <%end %>
       <div style="margin:20px; padding:2px; color:blue;">
-        <span><%= live_patch(" Games", to: Routes.game_index_path(@socket, :index)) %></span>
+        <span><%= live_redirect(" Games", to: Routes.game_index_path(@socket, :index)) %></span>
       </div>
       <%= if @user.role == "admin" || @user.role == "superadmin" do %>
         <div style="margin:20px; padding:2px; color:blue;">
           <span>
-            <%= live_patch(" system users", to: Routes.user_index_path(@socket, :index)) %>
+            <%= live_redirect(" system users", to: Routes.user_index_path(@socket, :index)) %>
           </span>
         </div>
       <% else %>
         <div style="margin:20px; padding:2px; color:blue;">
           <span>
-            <%= live_patch(" my account", to: Routes.user_index_path(@socket, :index)) %>
+            <%= live_redirect(" my profile", to: Routes.user_index_path(@socket, :index)) %>
           </span>
         </div>
       <% end %>
       <%= if @user.role == "admin" || @user.role == "superadmin" do %>
-        <div style="margin:20px; padding:2px; color:blue;">Accounts earnings</div>
+        <div style="margin:20px; padding:2px; color:blue;">
+          <span>
+            <%= live_redirect(" simulate games", to: Routes.simulategames_index_path(@socket, :index)) %>
+          </span>
+        </div>
       <% end %>
     </div>
   </div>

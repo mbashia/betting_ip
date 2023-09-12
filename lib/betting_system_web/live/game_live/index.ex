@@ -156,6 +156,8 @@ defmodule BettingSystemWeb.GameLive.Index do
       |> String.replace("==", "")
       |> String.replace("=", "")
       |> String.replace("/", "mbash")
+      |> String.replace("+", "mbash")
+
 
     timestamp = DateTime.utc_now() |> DateTime.to_unix(:second) |> Integer.to_string()
 

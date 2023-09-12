@@ -18,7 +18,7 @@ defmodule BettingSystem.Games do
 
   """
   def list_games do
-    Repo.all(Game)
+    Repo.all(from g in Game, order_by: [desc: g.status, desc: g.id])
     |> Repo.preload(:sport)
   end
 
