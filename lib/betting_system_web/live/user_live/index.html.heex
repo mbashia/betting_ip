@@ -1,3 +1,4 @@
+<%=IO.inspect(@user.role) %>
 <%= if @user.role == "admin" do %>
   <div>
     <h1>Listing users</h1>
@@ -9,7 +10,7 @@
           id={@user.id || :new}
           title={@page_title}
           action={@live_action}
-          user={@user}
+          user={@user_edit}
           return_to={Routes.user_index_path(@socket, :index)}
         />
       </.modal>
@@ -30,29 +31,29 @@
         </tr>
       </thead>
       <tbody id="sports">
-        <%= for user <- @users do %>
-          <tr id={"sport-#{user.id}"}>
-            <td><%= user.firstname %></td>
+        <%= for client <- @clients do %>
+          <tr id={"sport-#{client.id}"}>
+            <td><%= client.firstname %></td>
 
-            <td><%= user.lastname %></td>
-            <td><%= user.phone_number %></td>
-            <td><%= user.role %></td>
+            <td><%= client.lastname %></td>
+            <td><%= client.phone_number %></td>
+            <td><%= client.role %></td>
 
-            <td><%= user.status %></td>
+            <td><%= client.status %></td>
 
             <td>
               <span>
-                <%= live_redirect("Show", to: Routes.user_show_path(@socket, :show, user)) %>
+                <%= live_redirect("Show", to: Routes.user_show_path(@socket, :show, client)) %>
               </span>
               <span>
-                <%= live_patch("Edit", to: Routes.user_index_path(@socket, :edit, user)) %>
+                <%= live_patch("Edit", to: Routes.user_index_path(@socket, :edit, client)) %>
               </span>
-              <%= if user.status == "inactive" do %>
+              <%= if client.status == "inactive" do %>
                 <span>
                   <%= link("activate",
                     to: "#",
                     phx_click: "delete",
-                    phx_value_id: user.id,
+                    phx_value_id: client.id,
                     data: [confirm: "Are you sure?"]
                   ) %>
                 </span>
@@ -61,7 +62,7 @@
                   <%= link("deactivate",
                     to: "#",
                     phx_click: "delete",
-                    phx_value_id: user.id,
+                    phx_value_id: client.id,
                     data: [confirm: "Are you sure?"]
                   ) %>
                 </span>
@@ -73,6 +74,8 @@
     </table>
   </div>
 <% else %>
+<%=IO.inspect(@user.role) %>
+
   <div>
     <p><%= @user.firstname %></p>
     <p><%= @user.lastname %></p>
@@ -87,7 +90,15 @@
     <%= if @check_bet_history == 1 do %>
       <p>you have <%= length(@bets) %> bets</p>
       <%= for bet <- @bets do %>
-        <p>bet id: <%= bet.bet_id %></p>
+      <div style = "border:solid; border-width:1px; border-color:gray; margin:10px;">
+        <p>bet id:#<%= bet.bet_id %></p>
+                <p>amount:<%= bet.amount %></p>
+                <p>payout:<%= bet.payout %></p>
+                 <p style ="color:brown;"><%= bet.status %></p>
+                <p>result:<%= bet.end_result %></p>
+</div>
+
+
       <% end %>
     <% else %>
       <div></div>

@@ -11,7 +11,7 @@ defmodule BettingSystemWeb.UserLive.Index do
   alias BettingSystem.Accounts.UserNotifier
   @impl true
   def mount(_params, session, socket) do
-    :timer.send_interval(20000, self(), :update_games)
+    #:timer.send_interval(20000, self(), :update_games)
 
     user = Accounts.get_user_by_session_token(session["user_token"]) |> Repo.preload(:betslips)
     users = Users.list_users()
@@ -30,7 +30,7 @@ defmodule BettingSystemWeb.UserLive.Index do
 
     {:ok,
      socket
-     |> assign(:users, users)
+     |> assign(:clients, users)
      |> assign(:user, user)
      |> assign(:check_bet_history, 0)
      |> assign(:bets, user_bets)}
@@ -42,9 +42,14 @@ defmodule BettingSystemWeb.UserLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
+    IO.write("we are here")
+    IO.inspect(id)
+    id = String.to_integer(id)
+    IO.inspect(id)
+
     socket
     |> assign(:page_title, "Edit user")
-    |> assign(:user, Users.get_user!(id))
+    |> assign(:user_edit, Users.get_user!(id))
   end
 
   # defp apply_action(socket, :new, _params) do
@@ -156,7 +161,7 @@ defmodule BettingSystemWeb.UserLive.Index do
           UserNotifier.bet_loss_results_email(bet, socket.assigns.user)
 
         false ->
-          Bet.update_bets(bet, %{"end_result" => "null", "status" => "closed"})
+         _false = "false"
       end
     end)
 

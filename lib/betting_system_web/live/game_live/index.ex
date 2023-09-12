@@ -155,8 +155,8 @@ defmodule BettingSystemWeb.GameLive.Index do
       SecureRandom.base64(socket.assigns.user.id)
       |> String.replace("==", "")
       |> String.replace("=", "")
-      |> String.replace("/", "mbash")
-      |> String.replace("+", "mbash")
+      |> String.replace("/", "m")
+      |> String.replace("+", "v")
 
 
     timestamp = DateTime.utc_now() |> DateTime.to_unix(:second) |> Integer.to_string()
@@ -202,4 +202,6 @@ defmodule BettingSystemWeb.GameLive.Index do
     Games.list_games()
     |> Enum.filter(fn x -> x.status == "pending" end)
   end
+
+
 end
