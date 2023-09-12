@@ -4,13 +4,13 @@ defmodule BettingSystemWeb.UserLive.Show do
   alias BettingSystem.Betslips
   alias BettingSystem.Accounts
 
-
   @impl true
   def mount(_params, session, socket) do
     user = Accounts.get_user_by_session_token(session["user_token"])
 
-    {:ok, socket
-  |>assign(:user,user)}
+    {:ok,
+     socket
+     |> assign(:user, user)}
   end
 
   @impl true

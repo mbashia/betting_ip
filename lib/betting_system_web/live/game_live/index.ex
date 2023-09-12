@@ -158,7 +158,6 @@ defmodule BettingSystemWeb.GameLive.Index do
       |> String.replace("/", "m")
       |> String.replace("+", "v")
 
-
     timestamp = DateTime.utc_now() |> DateTime.to_unix(:second) |> Integer.to_string()
 
     unique_bet_id = unique_bet_id <> timestamp
@@ -202,6 +201,4 @@ defmodule BettingSystemWeb.GameLive.Index do
     Games.list_games()
     |> Enum.filter(fn x -> x.status == "pending" end)
   end
-
-
 end

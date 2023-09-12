@@ -11,7 +11,7 @@ defmodule BettingSystemWeb.UserLive.Index do
   alias BettingSystem.Accounts.UserNotifier
   @impl true
   def mount(_params, session, socket) do
-    #:timer.send_interval(20000, self(), :update_games)
+    # :timer.send_interval(20000, self(), :update_games)
 
     user = Accounts.get_user_by_session_token(session["user_token"]) |> Repo.preload(:betslips)
     users = Users.list_users()
@@ -161,7 +161,7 @@ defmodule BettingSystemWeb.UserLive.Index do
           UserNotifier.bet_loss_results_email(bet, socket.assigns.user)
 
         false ->
-         _false = "false"
+          _false = "false"
       end
     end)
 
