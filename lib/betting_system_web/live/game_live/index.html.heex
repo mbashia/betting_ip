@@ -14,7 +14,7 @@
 <% end %>
 <div class="main-div flex flex-row gap-2 h-[80%] pt-4 overflow-y-auto
 ">
-  <div class="w-[70%] bg-[#141C33] rounded p-2 ">
+  <div class="w-[70%] bg-[#141C33] rounded p-2 h-[80%] overflow-y-auto ">
     <div
       style="border-color:rgba(123,131,156,.6);"
       class="flex justify-evenly poppins-regular pb-2 border-b-[1px] text-[#8A92AB]"
@@ -110,7 +110,7 @@
       <p class="poppins-regular text-white">Betslip</p>
     </div>
     <div
-      class="flex w-[full] justify-around  border-b-[1x] pb-2 text-[#8A92AB]"
+      class="flex w-[full] justify-around  border-b-[1px] pb-2 text-[#8A92AB]"
       style=" border-color:rgba(123,131,156,.6); "
     >
       <div>Single</div>
@@ -144,19 +144,19 @@
         </div>
         <div class="flex justify-between p-2">
           <p>total odds</p>
-          <p><%= total_odds = Enum.map(@bets, & &1.odds) |> Enum.sum() %></p>
+          <p><%= @total_odds %></p>
         </div>
 
         <div class="flex justify-between p-2">
           <p>payout</p>
-          <p>38900</p>
+          <p><%= @payout%></p>
         </div>
       </div>
-      <.form let={f} for={@changeset} id="bets-form" phx-submit="place bet">
-        <%= number_input(f, :amount, step: "any", placeholder: "Amount(KES)", class: "w-[full]") %>
+      <.form let={f} for={@changeset} id="bets-form" phx-submit="place bet " phx-change = "validate_amount">
+        <%= number_input(f, :amount, step: "any", placeholder: "Amount(KES)", class: "w-[full] text-black") %>
         <%= error_tag(f, :amount) %>
 
-        <%= number_input(f, :odds, step: "any", type: "hidden", value: total_odds) %>
+        <%= number_input(f, :odds, step: "any", type: "hidden", value: @total_odds) %>
         <%= error_tag(f, :odds) %>
 
         <div class = "ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">

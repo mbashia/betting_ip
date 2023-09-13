@@ -23,7 +23,8 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:sports, sports)
      |> assign(:bets, "")
      |> assign(:total_odds, 0.0)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+    |>assign(:payout, 0.0)}
   end
 
   @impl true
@@ -80,11 +81,13 @@ defmodule BettingSystemWeb.GameLive.Index do
       case Betslips.create_betslip(betslip_params) do
         {:ok, _betslip} ->
           selected_bets = Betslips.get_betslips(socket.assigns.user.id)
+          total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
 
           {:noreply,
            socket
            |> put_flash(:info, "Betslip created successfully")
-           |> assign(:bets, selected_bets)}
+           |> assign(:bets, selected_bets)
+           |>assign(:total_odds,total_odds)}
 
         {:error, %Ecto.Changeset{} = changeset} ->
           {:noreply, assign(socket, changeset: changeset)}
@@ -107,12 +110,15 @@ defmodule BettingSystemWeb.GameLive.Index do
       case Betslips.update_betslip(betslip, betslip_params) do
         {:ok, _betslip} ->
           selected_bets = Betslips.get_betslips(socket.assigns.user.id)
+          total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
+
           IO.inspect(selected_bets)
 
           {:noreply,
            socket
            |> put_flash(:info, "Betslip updated successfully")
-           |> assign(:bets, selected_bets)}
+           |> assign(:bets, selected_bets)
+           |> assign(:total_odds,total_odds)}
 
         {:error, %Ecto.Changeset{} = changeset} ->
           {:noreply, assign(socket, :changeset, changeset)}
@@ -186,15 +192,26 @@ defmodule BettingSystemWeb.GameLive.Index do
         end
 
         selected_bets = Betslips.get_betslips(socket.assigns.user.id)
+        total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
+
 
         {:noreply,
          socket
          |> put_flash(:info, "Bets created successfully")
-         |> assign(:bets, selected_bets)}
+         |> assign(:bets, selected_bets)
+        |> assign(:total_odds, total_odds)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+  def handle_event("validate_amount", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket)do
+    amount = String.to_float(amount)
+    odds = String.to_float(odds)
+    payout = odds * amount
+
+{:noreply,socket
+|>assign(:payout, payout)}
   end
 
   defp list_games do
