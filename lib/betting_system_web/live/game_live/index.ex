@@ -181,14 +181,13 @@ defmodule BettingSystemWeb.GameLive.Index do
         selected_bets = Betslips.get_betslips(socket.assigns.user.id)
         total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
         IO.inspect(selected_bets)
+
         {:noreply,
          socket
          |> put_flash(:info, "Bets created successfully")
          |> assign(:bets, selected_bets)
          |> assign(:total_odds, total_odds)
          |> assign(:payout, 0.0)}
-
-
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

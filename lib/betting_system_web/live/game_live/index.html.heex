@@ -121,12 +121,9 @@
       </div>
 
       <%= if @bets == [] do %>
-        <div class="poppins-bold text-xl ml-4"> LOAD BETSLIP TO START WINNING NOW!!!
-        <div> <img
-        src="/images/betting.gif"
-        alt="scadvert logo"
-        class="  "
-      /></div>
+        <div class="poppins-bold text-xl ml-4">
+          LOAD BETSLIP TO START WINNING NOW!!!
+          <div><img src="/images/betting.gif" alt="scadvert logo" class="  " /></div>
         </div>
       <% else %>
         <div class=" ">
@@ -141,17 +138,15 @@
               </div>
               <div class="flex gap-2">
                 <div class="h-[10px] w-[10px] mr-4 ">x<%= bet.odds %></div>
-                <%=if bet.result_type == "team1 win" do %>
-                <div class=" text-base"><%=bet.game.team1%></div>
-                <%else %>
-                <%= if bet.result_type == "game_draw" do %>
-                 <div class=" text-base"> game draw</div>
-                 <%else %>
-                                 <div class=" text-base"><%=bet.game.team2%></div>
-
-                 <%end %>
-
-                <%end %>
+                <%= if bet.result_type == "team1 win" do %>
+                  <div class=" text-base"><%= bet.game.team1 %></div>
+                <% else %>
+                  <%= if bet.result_type == "game_draw" do %>
+                    <div class=" text-base">game draw</div>
+                  <% else %>
+                    <div class=" text-base"><%= bet.game.team2 %></div>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           <% end %>
@@ -197,7 +192,6 @@
         </.form>
       </div>
     <% else %>
-    
-    <%end %>
+    <% end %>
   </div>
 </div>
