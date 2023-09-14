@@ -120,8 +120,8 @@
         <div>System</div>
       </div>
 
-      <%= if @bets == "" do %>
-        <div class="poppins-bold text-xl ml-4"> LOAD BETSLIP TO START WINNING NOW
+      <%= if @bets == [] do %>
+        <div class="poppins-bold text-xl ml-4"> LOAD BETSLIP TO START WINNING NOW!!!
         <div> <img
         src="/images/betting.gif"
         alt="scadvert logo"
@@ -136,19 +136,29 @@
               style=" border-color:rgba(123,131,156,.6); "
             >
               <div class="flex justify-between">
-                <span class="text-sm"><%= bet.game.team1 %>vs<%= bet.game.team2 %></span>
+                <span class="text-sm"><%= bet.game.team1 %> vs <%= bet.game.team2 %></span>
                 <button phx-click="cancel" phx-value-cancel={bet.id}>X</button>
               </div>
               <div class="flex gap-2">
                 <div class="h-[10px] w-[10px] mr-4 ">x<%= bet.odds %></div>
-                <div class=" text-base">chelsea</div>
+                <%=if bet.result_type == "team1 win" do %>
+                <div class=" text-base"><%=bet.game.team1%></div>
+                <%else %>
+                <%= if bet.result_type == "game_draw" do %>
+                 <div class=" text-base"> game draw</div>
+                 <%else %>
+                                 <div class=" text-base"><%=bet.game.team2%></div>
+
+                 <%end %>
+
+                <%end %>
               </div>
             </div>
           <% end %>
         </div>
       <% end %>
     </div>
-    <%= if @bets != "" do %>
+    <%= if @bets != [] do %>
       <div class="bet-details-div h-[40%] text-[#8A92AB]">
         <div class="flex justify-between p-2">
           <p>balance</p>
