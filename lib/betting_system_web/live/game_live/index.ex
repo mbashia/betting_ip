@@ -24,7 +24,7 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:bets, "")
      |> assign(:total_odds, 0.0)
      |> assign(:changeset, changeset)
-    |>assign(:payout, 0.0)}
+     |> assign(:payout, 0.0)}
   end
 
   @impl true
@@ -87,7 +87,7 @@ defmodule BettingSystemWeb.GameLive.Index do
            socket
            |> put_flash(:info, "Betslip created successfully")
            |> assign(:bets, selected_bets)
-           |>assign(:total_odds,total_odds)}
+           |> assign(:total_odds, total_odds)}
 
         {:error, %Ecto.Changeset{} = changeset} ->
           {:noreply, assign(socket, changeset: changeset)}
@@ -118,7 +118,7 @@ defmodule BettingSystemWeb.GameLive.Index do
            socket
            |> put_flash(:info, "Betslip updated successfully")
            |> assign(:bets, selected_bets)
-           |> assign(:total_odds,total_odds)}
+           |> assign(:total_odds, total_odds)}
 
         {:error, %Ecto.Changeset{} = changeset} ->
           {:noreply, assign(socket, :changeset, changeset)}
@@ -147,7 +147,7 @@ defmodule BettingSystemWeb.GameLive.Index do
   #     {:noreply, assign(socket, :changeset, changeset)}
   #   end
 
-  def handle_event("place bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
+  def handle_event("place_bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
     amount = String.to_integer(amount)
     odds = String.to_float(odds)
     betslip_items = Betslips.get_betslips(socket.assigns.user.id)
@@ -194,24 +194,25 @@ defmodule BettingSystemWeb.GameLive.Index do
         selected_bets = Betslips.get_betslips(socket.assigns.user.id)
         total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
 
-
         {:noreply,
          socket
          |> put_flash(:info, "Bets created successfully")
          |> assign(:bets, selected_bets)
-        |> assign(:total_odds, total_odds)}
+         |> assign(:total_odds, total_odds)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
-  def handle_event("validate_amount", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket)do
-    amount = String.to_float(amount)
+
+  def handle_event("validate_amount", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
+    amount = String.to_integer(amount)
     odds = String.to_float(odds)
     payout = odds * amount
 
-{:noreply,socket
-|>assign(:payout, payout)}
+    {:noreply,
+     socket
+     |> assign(:payout, payout)}
   end
 
   defp list_games do
