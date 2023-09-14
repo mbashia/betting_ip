@@ -1,4 +1,4 @@
-<div class="h-[100vh] w-[100vw] bg-[#071C27] relative border  border-transparent text-white">
+<div  class="h-[100vh] w-[100vw] bg-[#071C27] relative border   border-transparent text-white">
   <div class="m-10 mb-14 w-[95%]  p-6  ">
     <span class="poppins-bold text-white text-3xl">SportOdds</span>
   </div>
@@ -27,7 +27,7 @@
       </li>
     </ul>
   </div>
-  <div class=" bg-[#E5F2FC] flex flex-col  absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[35%] p-4">
+  <div style="display:none;" id ="registrationForm" class=" bg-[#E5F2FC] flex flex-col   absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[35%] p-4">
     <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
@@ -81,7 +81,7 @@
       </div>
     </.form>
     <span class="mx-auto mt-2">
-      <%= link("Log in", to: Routes.user_session_path(@conn, :new), class: "text-[#00A8FA]") %> | <%= link(
+      <%= link("Log in", to: Routes.user_session_path(@conn, :new), class: " ml-[20%] text-[#00A8FA]") %> | <%= link(
         "Forgot your password?",
         to: Routes.user_reset_password_path(@conn, :new),
         class: "text-black"
@@ -89,7 +89,7 @@
     </span>
   </div>
 
-  <div class="bg-[#E5F2FC] absolute right-[250px] hidden rounded-2xl top-[130px] h-[65%] w-[35%] p-4">
+  <div id= "startDiv" class="bg-[#E5F2FC] absolute right-[250px]  rounded-2xl top-[130px] h-[65%] w-[35%] p-4">
     <div class="text-black ml-8 m-4 p-4">
       <span class=" poppins-bold text-lg text-[#828F96] m-4 ">Welcome to SportOdds</span>
       <p class="text-xl  poppins-bold text-[#071C27] mt-2">Join the player community</p>
@@ -136,7 +136,7 @@
           </div>
         </div>
 
-        <button class="mx-auto bg-[#00A8FA] px-6 py-4 rounded mt-6">LET'S GET STARTED</button>
+        <button class="mx-auto bg-[#00A8FA] px-6 py-4 rounded mt-6"onclick="showRegistrationForm()">LET'S GET STARTED</button>
         <span class="mx-auto mt-4">
           Have an account? <a class="text-[#00A8FA]" href="#">sign in</a>
         </span>
@@ -144,3 +144,20 @@
     </div>
   </div>
 </div>
+
+<script>
+  function showRegistrationForm() {
+    var form = document.getElementById('registrationForm');
+    var startdiv = document.getElementById('startDiv');
+
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      startdiv.style.display = 'none';
+    } else {
+      form.style.display = 'none';
+      startdiv.style.display = 'block';
+    }
+  }
+</script>
+
+
