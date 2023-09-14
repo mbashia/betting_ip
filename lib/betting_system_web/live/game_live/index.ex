@@ -136,17 +136,6 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:bets, Betslips.get_betslips(socket.assigns.user.id))}
   end
 
-  #   def handle_event("validate_amount", %{"bets" => bets_params}, socket) do
-  # IO.inspect(bets_params)
-
-  #     changeset =
-  #       socket.assigns.bets
-  #       |> Bet.change_bets(bets_params["amount"])
-  #       |> Map.put(:action, :validate)
-
-  #     {:noreply, assign(socket, :changeset, changeset)}
-  #   end
-
   def handle_event("place_bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do
     amount = String.to_integer(amount)
     odds = String.to_float(odds)
@@ -155,8 +144,6 @@ defmodule BettingSystemWeb.GameLive.Index do
     bet_slip_ids_map =
       Enum.map(betslip_items, fn betslip -> {betslip.game_id, betslip.game_id} end) |> Map.new()
 
-    # bet_slip_ids_list =
-    # Enum.map(betslip_items, fn betslip -> betslip.game_id end)
     unique_bet_id =
       SecureRandom.base64(socket.assigns.user.id)
       |> String.replace("==", "")
@@ -198,7 +185,8 @@ defmodule BettingSystemWeb.GameLive.Index do
          socket
          |> put_flash(:info, "Bets created successfully")
          |> assign(:bets, selected_bets)
-         |> assign(:total_odds, total_odds)}
+         |> assign(:total_odds, total_odds)
+         |> assign(:payout, 0.0)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

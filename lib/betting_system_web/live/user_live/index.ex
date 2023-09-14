@@ -1,5 +1,5 @@
 defmodule BettingSystemWeb.UserLive.Index do
-  use BettingSystemWeb, :live_view
+  use BettingSystemWeb, :game_live_view
   alias BettingSystem.Users
   alias BettingSystem.Games
   alias BettingSystem.Bet

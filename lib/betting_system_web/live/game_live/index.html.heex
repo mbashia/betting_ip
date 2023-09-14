@@ -12,9 +12,9 @@
     />
   </.modal>
 <% end %>
-<div class="main-div flex flex-row gap-2 h-[80%] pt-4 overflow-y-auto
+<div class="main-div h-[100vh] flex relative flex-row gap-2 pt-4 
 ">
-  <div class="w-[70%] bg-[#141C33] rounded p-2 h-[80%] overflow-y-auto ">
+  <div class="w-[70%] bg-[#141C33] rounded p-2   h-[80%] overflow-y-auto ">
     <div
       style="border-color:rgba(123,131,156,.6);"
       class="flex justify-evenly poppins-regular pb-2 border-b-[1px] text-[#8A92AB]"
@@ -105,52 +105,63 @@
       <span><%= live_patch("New Game", to: Routes.game_index_path(@socket, :new)) %></span>
     <% end %>
   </div>
-  <div class=" betslip-div  bg-blue-[#141C33] w-[30%] text-white">
-    <div class="w-[full] bg-[#202A39] p-2">
-      <p class="poppins-regular text-white">Betslip</p>
-    </div>
-    <div
-      class="flex w-[full] justify-around  border-b-[1px] pb-2 text-[#8A92AB]"
-      style=" border-color:rgba(123,131,156,.6); "
-    >
-      <div>Single</div>
-      <div>Multiple</div>
+  <div class=" betslip-div  bg-blue-[#141C33] w-[30%] h-[100vh] text-white">
+    <div class="h-[45%] overflow-y-auto">
+      <div class="w-[full] bg-[#202A39] p-2">
+        <p class="poppins-regular text-white">Betslip</p>
+      </div>
+      <div
+        class="flex w-[full] justify-around  border-b-[1px] pb-2 text-[#8A92AB]"
+        style=" border-color:rgba(123,131,156,.6); "
+      >
+        <div>Single</div>
+        <div>Multiple</div>
 
-      <div>System</div>
-    </div>
-    <div>
+        <div>System</div>
+      </div>
+
       <%= if @bets == "" do %>
-        <div class="poppins-light text-sm ml-4">no bet yet</div>
+        <div class="poppins-bold text-xl ml-4"> LOAD BETSLIP TO START WINNING NOW
+        <div> <img
+        src="/images/betting.gif"
+        alt="scadvert logo"
+        class="  "
+      /></div>
+        </div>
       <% else %>
-        <%= for bet <- @bets do %>
-          <div
-            class="border-b-[1px] poppins-regular text-[#8A92AB] p-6"
-            style=" border-color:rgba(123,131,156,.6); "
-          >
-            <div class="flex justify-between">
-              <span class="text-sm"><%= bet.game.team1 %>vs<%= bet.game.team2 %></span>
-              <button phx-click="cancel" phx-value-cancel={bet.id}>X</button>
+        <div class=" ">
+          <%= for bet <- @bets do %>
+            <div
+              class="border-b-[1px] poppins-regular text-[#8A92AB] p-6"
+              style=" border-color:rgba(123,131,156,.6); "
+            >
+              <div class="flex justify-between">
+                <span class="text-sm"><%= bet.game.team1 %>vs<%= bet.game.team2 %></span>
+                <button phx-click="cancel" phx-value-cancel={bet.id}>X</button>
+              </div>
+              <div class="flex gap-2">
+                <div class="h-[10px] w-[10px] mr-4 ">x<%= bet.odds %></div>
+                <div class=" text-base">chelsea</div>
+              </div>
             </div>
-            <div class="flex gap-2">
-              <div class="h-[10px] w-[10px] mr-4 ">x<%= bet.odds %></div>
-              <div class=" text-base">chelsea</div>
-            </div>
-          </div>
-        <% end %>
-        <div class="bet-details-div  text-[#8A92AB]">
-          <div class="flex justify-between p-2">
-            <p>balance</p>
-            <p>1000000</p>
-          </div>
-          <div class="flex justify-between p-2">
-            <p>total odds</p>
-            <p><%= @total_odds %></p>
-          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= if @bets != "" do %>
+      <div class="bet-details-div h-[40%] text-[#8A92AB]">
+        <div class="flex justify-between p-2">
+          <p>balance</p>
+          <p>1000000</p>
+        </div>
+        <div class="flex justify-between p-2">
+          <p>total odds</p>
+          <p><%= @total_odds %></p>
+        </div>
 
-          <div class="flex justify-between p-2">
-            <p>payout</p>
-            <p><%= @payout %></p>
-          </div>
+        <div class="flex justify-between p-2">
+          <p>payout</p>
+          <p><%= @payout %></p>
         </div>
         <.form
           let={f}
@@ -174,7 +185,9 @@
             <%= submit("place bet", phx_disable_with: "Saving...", class: "poppins-regular") %>
           </div>
         </.form>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+    
+    <%end %>
   </div>
 </div>
