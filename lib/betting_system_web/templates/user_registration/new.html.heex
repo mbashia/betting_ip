@@ -165,9 +165,17 @@
         >
           LET'S GET STARTED
         </button>
-        <span class="mx-auto mt-4">
-          Have an account? <a class="text-[#00A8FA]" href="#">sign in</a>
+        <div class = "flex gap-2 mx-auto mt-4">
+        
+        <span class=" ">
+          Have an account? 
         </span>
+        <span class = ""><%= link("Log in",
+        to: Routes.user_session_path(@conn, :new),
+        class: "  text-[#00A8FA]"
+      ) %></span></div>
+        
+        
       </div>
     </div>
   </div>
