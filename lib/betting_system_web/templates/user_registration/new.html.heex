@@ -217,6 +217,13 @@
     leaveDiv.style.display = 'none';
     overlay.style.display="none"; // Remove the blur class
   }
+
+  overlay.addEventListener('click', function(event) {
+      if (event.target === overlay) {
+        leaveDiv.style.display = 'none';
+        overlay.style.display = 'none';
+      }
+    });
    
      }
 </script>
