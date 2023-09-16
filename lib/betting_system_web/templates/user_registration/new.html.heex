@@ -1,11 +1,24 @@
-<div  class="h-[100vh] w-[100vw] bg-[#071C27] relative border   border-transparent text-white">
-  <div class="m-10 mb-14 w-[95%]  p-6  ">
+<div
+  id="mainDiv"
+  class="h-[100vh] w-[100vw] bg-[#071C27] relative border   border-transparent text-white"
+  style = "z-index:2;"
+>
+<div style = "display:none; background-color:rgba(0,0,0, 0.5); z-index:3;" id = "overlay" class =" absolute top-0 right-0  h-[100%] w-[100%] ">  </div>
+
+
+  <div class="m-10 mb-14 w-[95%] flex justify-between p-6  ">
     <span class="poppins-bold text-white text-3xl">SportOdds</span>
+    <div class="flex gap-2 ">
+      <button onclick="toggleLeave()" class="  align-top">
+        <%= Heroicons.icon("x-mark", type: "outline", class: "h-6 w-6 text-white inline-block ") %>
+        <span class=" mt-2">Close</span>
+      </button>
+    </div>
   </div>
   <div class="ml-[150px] poppins-bold text-lg text-white">
     <p class="whitespace-normal break-words">Complete the following information
       .</p>
-    
+
     <p>to benefit from all the advantages.</p>
     <p>of SportOdds products.</p>
     <ul class="mt-4 ">
@@ -27,7 +40,11 @@
       </li>
     </ul>
   </div>
-  <div style="display:none;" id ="registrationForm" class=" bg-[#E5F2FC] flex flex-col   absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[35%] p-4">
+  <div
+    style="display:none;"
+    id="registrationForm"
+    class=" bg-[#E5F2FC] flex flex-col    absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[35%] p-4"
+  >
     <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
@@ -81,7 +98,10 @@
       </div>
     </.form>
     <span class="mx-auto mt-2">
-      <%= link("Log in", to: Routes.user_session_path(@conn, :new), class: " ml-[20%] text-[#00A8FA]") %> | <%= link(
+      <%= link("Log in",
+        to: Routes.user_session_path(@conn, :new),
+        class: " ml-[20%] text-[#00A8FA]"
+      ) %> | <%= link(
         "Forgot your password?",
         to: Routes.user_reset_password_path(@conn, :new),
         class: "text-black"
@@ -89,7 +109,10 @@
     </span>
   </div>
 
-  <div id= "startDiv" class="bg-[#E5F2FC] absolute right-[250px]  rounded-2xl top-[130px] h-[65%] w-[35%] p-4">
+  <div
+    id="startDiv"
+    class="bg-[#E5F2FC] absolute right-[250px]  rounded-2xl top-[130px] h-[65%] w-[35%] p-4"
+  >
     <div class="text-black ml-8 m-4 p-4">
       <span class=" poppins-bold text-lg text-[#828F96] m-4 ">Welcome to SportOdds</span>
       <p class="text-xl  poppins-bold text-[#071C27] mt-2">Join the player community</p>
@@ -136,14 +159,37 @@
           </div>
         </div>
 
-        <button class="mx-auto bg-[#00A8FA] px-6 py-4 rounded mt-6"onclick="showRegistrationForm()">LET'S GET STARTED</button>
+        <button
+          class="mx-auto bg-[#00A8FA] px-6 py-4 rounded mt-6"
+          onclick="showRegistrationForm()"
+        >
+          LET'S GET STARTED
+        </button>
         <span class="mx-auto mt-4">
           Have an account? <a class="text-[#00A8FA]" href="#">sign in</a>
         </span>
       </div>
     </div>
   </div>
+  <div
+    style="display:none;z-index:4;"
+    id="leave"
+    class="absolute 	 left-[30%] shadow-2xl bg-white p-6 rounded-2xl top-[30%] h-[30%] w-[25%]"
+  >
+    <div>
+      <p class="poppins-bold text-lg mb-4 shadow text-[#828F96]">
+        Are you sure you want to leave?
+      </p>
+      <p class=" poppins-regular text-lg text-[#828F96]">
+        if you leave the registration process all the information you have entered will be deleted
+      </p>
+      <div class="ml-8 flex gap-2">
+        <button class="bg-[#00A8FA] px-4 py-2 text-white rounded-xl">Continue</button><button class="bg-red-600 px-4 py-2 text-white rounded-xl">Leave</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <script>
   function showRegistrationForm() {
@@ -159,5 +205,18 @@
     }
   }
 </script>
+<script>
+    function toggleLeave() {
 
-
+        var leaveDiv = document.getElementById('leave');
+        var overlay = document.getElementById('overlay');
+         if (leaveDiv.style.display === 'none') {
+    leaveDiv.style.display = 'block';
+   overlay.style.display="block"; // Add the blur class
+  } else {
+    leaveDiv.style.display = 'none';
+    overlay.style.display="none"; // Remove the blur class
+  }
+   
+     }
+</script>
