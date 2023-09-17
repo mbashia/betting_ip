@@ -1,10 +1,14 @@
 <div
   id="mainDiv"
   class="h-[100vh] w-[100vw] bg-[#071C27] relative border   border-transparent text-white"
-  style = "z-index:2;"
+  style="z-index:2;"
 >
-<div style = "display:none; background-color:rgba(0,0,0, 0.5); z-index:3;" id = "overlay" class =" absolute top-0 right-0  h-[100%] w-[100%] ">  </div>
-
+  <div
+    style="display:none; background-color:rgba(0,0,0, 0.5); z-index:3;"
+    id="overlay"
+    class=" absolute top-0 right-0  h-[100%] w-[100%] "
+  >
+  </div>
 
   <div class="m-10 mb-14 w-[95%] flex justify-between p-6  ">
     <span class="poppins-bold text-white text-3xl">SportOdds</span>
@@ -82,6 +86,7 @@
           placeholder: " enter  email",
           class: "w-[100%] rounded-xl mt-4 text-black"
         ) %>
+
         <%= error_tag(f, :email) %>
       </div>
       <div class="m-4 text-[#828F96]">
@@ -165,17 +170,17 @@
         >
           LET'S GET STARTED
         </button>
-        <div class = "flex gap-2 mx-auto mt-4">
-        
-        <span class=" ">
-          Have an account? 
-        </span>
-        <span class = ""><%= link("Log in",
-        to: Routes.user_session_path(@conn, :new),
-        class: "  text-[#00A8FA]"
-      ) %></span></div>
-        
-        
+        <div class="flex gap-2 mx-auto mt-4">
+          <span class=" ">
+            Have an account?
+          </span>
+          <span class="">
+            <%= link("Log in",
+              to: Routes.user_session_path(@conn, :new),
+              class: "  text-[#00A8FA]"
+            ) %>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -197,7 +202,6 @@
     </div>
   </div>
 </div>
-
 
 <script>
   function showRegistrationForm() {

@@ -1,26 +1,25 @@
-
-
 <div
   id="mainDiv"
   class="h-[100vh] w-[100vw] bg-[#071C27] relative border flex flex-col justify-center items-center  border-transparent text-white"
-  style = "z-index:2;"
+  style="z-index:2;"
 >
-<p class = "glow">WELCOME TO SPORTODDS</p>
-<p  class = "poppins-regular text-3xl mb-6">LOGIN TO YOU ACCOUNT</p>
+  <p class="glow">WELCOME TO SPORTODDS</p>
+  <p class="poppins-regular text-3xl mb-6">LOGIN TO YOU ACCOUNT</p>
 
   <div
-    
     id="registrationForm"
-    class=" bg-[#E5F2FC] flex flex-col     rounded-2xl  h-[70%] w-[35%] p-4"
+    class=" bg-[#E5F2FC] flex flex-col     rounded-2xl  h-[55%] w-[35%] p-4"
   >
-     <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
+    <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
       <%= if @error_message do %>
         <div class="alert alert-danger">
           <p><%= @error_message %></p>
         </div>
       <% end %>
-      <span class="poppins-light text-[#828F96] text-2xl ml-10 ">Please login your personal details</span>
-     
+      <span class="poppins-light text-[#828F96] text-xl ml-10 ">
+        Please login using your personal details
+      </span>
+
       <div class="m-4 text-[#828F96]">
         <%= email_input(f, :email,
           required: true,
@@ -29,7 +28,7 @@
         ) %>
         <%= error_tag(f, :email) %>
       </div>
-      <div class="m-4 text-[#828F96]">
+      <div class="m-4  text-[#828F96]">
         <%= password_input(f, :password,
           required: true,
           placeholder: " enter password",
@@ -38,10 +37,9 @@
         <%= error_tag(f, :password) %>
       </div>
       <div class="m-4 text-[#828F96]">
-
-       <%= label(f, :remember_me, "Keep me logged in for 60 days") %>
-      <%= checkbox(f, :remember_me) %>
-</div>
+        <%= label(f, :remember_me, "Keep me logged in for 60 days") %>
+        <%= checkbox(f, :remember_me) %>
+      </div>
       <div class=" inline-block p-1 ml-[150px] px-6 bg-[#00A8FA]  rounded ">
         <%= submit("Log in") %>
       </div>
@@ -57,8 +55,4 @@
       ) %>
     </span>
   </div>
-
-  
 </div>
-
-
