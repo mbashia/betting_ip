@@ -91,6 +91,13 @@
         </div>
         <div style="margin:20px; padding:2px; color:blue;">
           <span>
+            <%= live_redirect(" simulate games",
+              to: Routes.simulategames_index_path(@socket, :index)
+            ) %>
+          </span>
+        </div>
+        <div style="margin:20px; padding:2px; color:blue;">
+          <span>
             <%= live_redirect(" system users", to: Routes.user_index_path(@socket, :index)) %>
           </span>
         </div>
@@ -99,13 +106,7 @@
             <%= live_redirect(" my profile", to: Routes.user_index_path(@socket, :index)) %>
           </span>
         </div>
-        <div style="margin:20px; padding:2px; color:blue;">
-          <span>
-            <%= live_redirect(" simulate games",
-              to: Routes.simulategames_index_path(@socket, :index)
-            ) %>
-          </span>
-        </div>
+        
       <% else %>
         <div class="mb-2">
           <div class="mx-[20px]  bg-[#202a39] h-[50px] p-2 ">
