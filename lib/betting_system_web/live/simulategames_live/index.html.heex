@@ -54,7 +54,7 @@
             </td>
             <td><%= game.sport.name %></td>
 
-            <td><%= game.team1 %>vs <%= game.team2 %></td>
+            <td><%= game.team1 %> vs <%= game.team2 %></td>
             <td><%= NaiveDateTime.to_iso8601(game.date) |> String.replace("T", " ") %></td>
             <td>
               <%= if game.status == "completed" do %>
