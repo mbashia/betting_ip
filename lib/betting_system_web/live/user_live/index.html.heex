@@ -1,26 +1,22 @@
 <%= if @user.role == "admin" do %>
-  
-
-    <%= if @live_action in [ :edit] do %>
-      <.modal return_to={Routes.user_index_path(@socket, :index)}>
-        <.live_component
-          module={BettingSystemWeb.UserLive.FormComponent}
-          id={@user.id || :new}
-          title={@page_title}
-          action={@live_action}
-          user={@user_edit}
-          return_to={Routes.user_index_path(@socket, :index)}
-        />
-      </.modal>
-    <% end %>
-
-    
+  <%= if @live_action in [ :edit] do %>
+    <.modal return_to={Routes.user_index_path(@socket, :index)}>
+      <.live_component
+        module={BettingSystemWeb.UserLive.FormComponent}
+        id={@user.id || :new}
+        title={@page_title}
+        action={@live_action}
+        user={@user_edit}
+        return_to={Routes.user_index_path(@socket, :index)}
+      />
+    </.modal>
+  <% end %>
 
   <div class="flex flex-col   w-[98%] gap-2">
     <div class="flex flex-col gap-1">
       <div class="flex flex-row items-end p-2 justify-between w-[100%]">
         <div>
-        <span class = "poppins-bold text-3xl text-white  uppercase ">Listing all users</span>
+          <span class="poppins-bold text-3xl text-white  uppercase ">Listing all users</span>
         </div>
         <%= live_patch(to: Routes.sport_index_path(@socket, :new)) do %>
           <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">

@@ -77,7 +77,7 @@ defmodule BettingSystemWeb.UserLive.Index do
             {:noreply,
              socket
              |> put_flash(:info, "User deactivated successfully")
-            |>assign(:clients, users)}
+             |> assign(:clients, users)}
 
           {:error, _changeset} ->
             {:noreply,
@@ -93,7 +93,7 @@ defmodule BettingSystemWeb.UserLive.Index do
             {:noreply,
              socket
              |> put_flash(:info, "User activated successfully")
-             |>assign(:clients, users)}
+             |> assign(:clients, users)}
 
           {:error, _changeset} ->
             {:noreply,
