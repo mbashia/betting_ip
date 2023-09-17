@@ -72,9 +72,12 @@ defmodule BettingSystemWeb.UserLive.Index do
       user.status == "active" ->
         case Users.update_user(user, %{status: "inactive"}) do
           {:ok, _user} ->
+            users = Users.list_users()
+
             {:noreply,
              socket
-             |> put_flash(:info, "User deactivated successfully")}
+             |> put_flash(:info, "User deactivated successfully")
+            |>assign(:clients, users)}
 
           {:error, _changeset} ->
             {:noreply,
@@ -85,9 +88,12 @@ defmodule BettingSystemWeb.UserLive.Index do
       user.status == "inactive" ->
         case Users.update_user(user, %{status: "active"}) do
           {:ok, _user} ->
+            users = Users.list_users()
+
             {:noreply,
              socket
-             |> put_flash(:info, "User activated successfully")}
+             |> put_flash(:info, "User activated successfully")
+             |>assign(:clients, users)}
 
           {:error, _changeset} ->
             {:noreply,

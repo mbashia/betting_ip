@@ -203,8 +203,13 @@
       <% end %>
     </div>
   </div>
-
-  <div style="padding-left:305px;">
-    <%= @inner_content %>
-  </div>
+  <%= if @user.role == "admin" || @user.role == "superadmin" do %>
+    <div style="padding-left:200px;">
+      <%= @inner_content %>
+    </div>
+  <% else %>
+    <div style="padding-left:305px;">
+      <%= @inner_content %>
+    </div>
+  <% end %>
 </main>

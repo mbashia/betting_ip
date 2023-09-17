@@ -12,9 +12,10 @@
   </.modal>
 <% end %>
 
-<div class="flex flex-col w-[98%] gap-2">
+<div class="flex flex-col   w-[98%] gap-2">
   <div class="flex flex-col gap-1">
-    <div class="flex flex-row items-end justify-between w-[100%]">
+    <div class="flex flex-row items-end p-2 justify-between w-[100%]">
+      <div></div>
       <%= live_patch(to: Routes.sport_index_path(@socket, :new)) do %>
         <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">
           <%= Heroicons.icon("plus",
@@ -25,25 +26,26 @@
       <% end %>
     </div>
   </div>
-  <div class="bg-white h-[50vh]  rounded-xl p-4 ">
+  <div class="bg-[#202941] text-white h-[50vh]  rounded-xl p-4 ">
     <table class="w-[100%]">
-      <thead class="border-b-2  border-black">
+      <thead class="border-b-2 poppins-regular border-black">
         <tr>
-          <th class="p-2 font-semibold text-gray-700">Name</th>
-          <th class="p-2 font-semibold text-gray-700">Description</th>
+          <th class="p-2 font-semibold ">image</th>
 
-          <th class="p-2 font-semibold text-gray-700">Status</th>
+          <th class="p-2 font-semibold ">Name</th>
+          <th class="p-2 font-semibold ">Description</th>
 
-          <th class="p-2 font-semibold text-gray-700">Actions</th>
+          <th class="p-2 font-semibold ">Status</th>
+
+          <th class="p-2 font-semibold ">Actions</th>
         </tr>
       </thead>
-      <tbody id="events">
+      <tbody id="events" class="poppins-light">
         <%= for sport <- @sports do %>
           <tr
             class="border-b-[1px] cursor-pointer text-center hover:bg-blue-100/50 transition-all ease-in-out duration-500  border-black"
             id={"sport-#{sport.id}"}
-          
-            >
+          >
             <td class="p-2">
               <div class="flex fex-col justify-center items-center">
                 <img src="/images/champe_no_bc.png" class="w-[50px] h-[50px] object-cover " />
@@ -52,7 +54,6 @@
             <td><%= sport.name %></td>
 
             <td><%= sport.description %></td>
-            <td><%= sport.active %></td>
 
             <td>
               <%= if sport.active == "Active" do %>
