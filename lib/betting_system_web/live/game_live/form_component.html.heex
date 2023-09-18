@@ -1,4 +1,4 @@
-<div>
+<div class="bg-[#202941] text-white poppins-regular ">
   <h2><%= @title %></h2>
 
   <.form
@@ -9,50 +9,67 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :sport) %>
-    <%= select(f, :sport_id, @sports, prompt: "Select a sport") %>
-    <%= error_tag(f, :sport_id) %>
+    <div class=" p-4 gap-4 w-[100%] flex flex-col">
+      <div class="flex   justify-between w-[full]	 ">
+        <div class="w-[30%] border border-blue-500 flex gap-2  items-center p-2  ">
+          <%= label(f, :sport, class: " w-[20%] border border-red-500") %>
+          <%= select(f, :sport_id, @sports,
+            prompt: "Select a sport",
+            class: " w-[70%] border border-red-500"
+          ) %>
+          <%= error_tag(f, :sport_id) %>
+        </div>
+        <div class="w-[70%]  border border-blue-500 flex gap-2  items-center p-2  ">
+          <%= label(f, :date, class: "w-[20%]") %>
+          <%= datetime_select(f, :date, class: "w-[70%]") %>
+          <%= error_tag(f, :date) %>
+        </div>
+      </div>
 
-    <%= label(f, :team1) %>
-    <%= text_input(f, :team1) %>
-    <%= error_tag(f, :team1) %>
+      <div class="flex justify-between	w-[full] ">
+        <%= label(f, :team1) %>
+        <%= text_input(f, :team1) %>
+        <%= error_tag(f, :team1) %>
 
-    <%= label(f, :team2) %>
-    <%= text_input(f, :team2) %>
-    <%= error_tag(f, :team2) %>
+        <%= label(f, :team2) %>
+        <%= text_input(f, :team2) %>
+        <%= error_tag(f, :team2) %>
+      </div>
+      <div class="flex justify-between	w-[full] ">
+        <%= label(f, :status) %>
+        <%= select(f, :status, ["pending", "completed", "in progress"], prompt: "set status") %>
+        <%= error_tag(f, :status) %>
 
-    <%= label(f, :date) %>
-    <%= datetime_select(f, :date) %>
-    <%= error_tag(f, :date) %>
+        <%= label(f, :result) %>
+        <%= select(f, :result, ["pending", "team1 win", "game_draw", "team2 win"],
+          prompt: "set result"
+        ) %>
+        <%= error_tag(f, :result) %>
+      </div>
 
-    <%= label(f, :status) %>
-    <%= select(f, :status, ["pending", "completed", "in progress"], prompt: "set status") %>
-    <%= error_tag(f, :status) %>
+      <div class="flex justify-between	w-[full] ">
+        <%= label(f, :location) %>
+        <%= text_input(f, :location) %>
+        <%= error_tag(f, :location) %>
 
-    <%= label(f, :result) %>
-    <%= select(f, :result, ["pending", "team1 win", "game_draw", "team2 win"],
-      prompt: "set result"
-    ) %>
-    <%= error_tag(f, :result) %>
+        <%= label(f, :win) %>
+        <%= number_input(f, :win, step: "any") %>
+        <%= error_tag(f, :win) %>
+      </div>
 
-    <%= label(f, :location) %>
-    <%= text_input(f, :location) %>
-    <%= error_tag(f, :location) %>
+      <div class="flex justify-between	w-[full] ">
+        <%= label(f, :draw) %>
+        <%= number_input(f, :draw, step: "any") %>
+        <%= error_tag(f, :draw) %>
 
-    <%= label(f, :win) %>
-    <%= number_input(f, :win, step: "any") %>
-    <%= error_tag(f, :win) %>
+        <%= label(f, :lose) %>
+        <%= number_input(f, :lose, step: "any") %>
+        <%= error_tag(f, :lose) %>
+      </div>
 
-    <%= label(f, :draw) %>
-    <%= number_input(f, :draw, step: "any") %>
-    <%= error_tag(f, :draw) %>
-
-    <%= label(f, :lose) %>
-    <%= number_input(f, :lose, step: "any") %>
-    <%= error_tag(f, :lose) %>
-
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <div>
+        <%= submit("Save", phx_disable_with: "Saving...") %>
+      </div>
     </div>
   </.form>
 </div>
