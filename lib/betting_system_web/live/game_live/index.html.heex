@@ -197,7 +197,10 @@
           <%= error_tag(f, :odds) %>
 
           <div class="ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
-            <%= submit("place bet", phx_disable_with: "Saving...", class: "poppins-regular") %>
+            <%= submit("place bet",
+              phx_disable_with: "Saving...",
+              class: "text-white poppins-regular"
+            ) %>
           </div>
         </.form>
       </div>
