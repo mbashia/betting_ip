@@ -6,12 +6,12 @@
     for={@changeset}
     id="game-form"
     phx-target={@myself}
-    phx-change="validate"
     phx-submit="save"
+    phx-validate="validate"
   >
     <div class=" p-4 gap-4 w-[100%] flex flex-col">
       <div class="flex   justify-between w-[full]	 ">
-        <div class="w-[30%] border border-blue-500 flex gap-2  items-center p-2  ">
+        <div class="w-[50%] border border-blue-500 flex gap-2  items-center p-2  ">
           <%= label(f, :sport, class: " w-[20%] border border-red-500") %>
           <%= select(f, :sport_id, @sports,
             prompt: "Select a sport",
@@ -19,9 +19,12 @@
           ) %>
           <%= error_tag(f, :sport_id) %>
         </div>
-        <div class="w-[70%]  border border-blue-500 flex gap-2  items-center p-2  ">
+        <div class="w-[50%]  border border-blue-500 flex gap-2  items-center p-2  ">
           <%= label(f, :date, class: "w-[20%]") %>
-          <%= datetime_select(f, :date, class: "w-[70%]") %>
+          <input type="datetime-local" id="datetimeInput" name="datetime" class="text-black" />
+
+          <%= text_input(f, :date, class: "w-[70%] text-black", type: "hidden", id: "hiddenInput") %>
+
           <%= error_tag(f, :date) %>
         </div>
       </div>
@@ -72,4 +75,14 @@
       </div>
     </div>
   </.form>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var datetimeInput = document.getElementById('datetimeInput');
+      var hiddenInput = document.getElementById('hiddenInput');
+
+      datetimeInput.addEventListener('change', function() {
+        hiddenInput.value = datetimeInput.value;
+      });
+    });
+  </script>
 </div>
