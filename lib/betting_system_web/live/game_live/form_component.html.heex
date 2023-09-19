@@ -9,19 +9,19 @@
     phx-submit="save"
     phx-validate="validate"
   >
-    <div class=" p-4 gap-4 w-[100%] flex flex-col">
+    <div class=" p-4 gap-4 w-[100%] flex flex-col  poppins-regular">
       <div class="flex   justify-between w-[full]	 ">
-        <div class="w-[50%] border border-blue-500 flex gap-2  items-center p-2  ">
-          <%= label(f, :sport, class: " w-[20%] border border-red-500") %>
+        <div class="w-[50%]  flex gap-2  items-center p-2  ">
+          <%= label(f, :sport, class: " w-[20%] ") %>
           <%= select(f, :sport_id, @sports,
             prompt: "Select a sport",
-            class: " w-[70%] border border-red-500"
+            class: " w-[70%] text-black rounded-lg"
           ) %>
           <%= error_tag(f, :sport_id) %>
         </div>
-        <div class="w-[50%]  border border-blue-500 flex gap-2  items-center p-2  ">
+        <div class="w-[50%]   flex gap-2  items-center p-2  ">
           <%= label(f, :date, class: "w-[20%]") %>
-          <input type="datetime-local" id="datetimeInput" name="datetime" class="text-black" />
+          <input type="datetime-local" id="datetimeInput" name="datetime" class="text-black  w-[70%] rounded-lg" />
 
           <%= text_input(f, :date, class: "w-[70%] text-black", type: "hidden", id: "hiddenInput") %>
 
@@ -30,44 +30,64 @@
       </div>
 
       <div class="flex justify-between	w-[full] ">
-        <%= label(f, :team1) %>
-        <%= text_input(f, :team1) %>
+              <div class="w-[50%]  flex gap-2  items-center p-2  ">
+
+        <%= label(f, :team1, class: "w-[20%] ") %>
+        <%= text_input(f, :team1, class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :team1) %>
+        </div>
+        <div class="w-[50%]  flex gap-2  items-center p-2  ">
 
-        <%= label(f, :team2) %>
-        <%= text_input(f, :team2) %>
+        <%= label(f, :team2, class: "w-[20%] ") %>
+        <%= text_input(f, :team2, class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :team2) %>
+        </div>
       </div>
       <div class="flex justify-between	w-[full] ">
-        <%= label(f, :status) %>
-        <%= select(f, :status, ["pending", "completed", "in progress"], prompt: "set status") %>
+                    <div class="w-[50%]  flex gap-2  items-center p-2  ">
+
+        <%= label(f, :status, class: "w-[20%] ") %>
+        <%= select(f, :status, ["pending", "completed", "in progress"], prompt: "set status", class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :status) %>
+</div>
+              <div class="w-[50%]  flex gap-2  items-center p-2  ">
 
-        <%= label(f, :result) %>
+        <%= label(f, :result, class: "w-[20%] ") %>
         <%= select(f, :result, ["pending", "team1 win", "game_draw", "team2 win"],
-          prompt: "set result"
-        ) %>
+          prompt: "set result",
+         class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :result) %>
+        </div>
       </div>
 
       <div class="flex justify-between	w-[full] ">
-        <%= label(f, :location) %>
-        <%= text_input(f, :location) %>
+                    <div class="w-[50%]  flex gap-2  items-center p-2  ">
+
+        <%= label(f, :location, class: "w-[20%] ") %>
+        <%= text_input(f, :location, class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :location) %>
+        </div>
+              <div class="w-[50%]  flex gap-2  items-center p-2  ">
 
-        <%= label(f, :win) %>
-        <%= number_input(f, :win, step: "any") %>
+        <%= label(f, :win, class: "w-[20%] ") %>
+        <%= number_input(f, :win, step: "any", class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :win) %>
+        </div>
       </div>
 
       <div class="flex justify-between	w-[full] ">
-        <%= label(f, :draw) %>
-        <%= number_input(f, :draw, step: "any") %>
-        <%= error_tag(f, :draw) %>
+                    <div class="w-[50%]  flex gap-2  items-center p-2  ">
 
-        <%= label(f, :lose) %>
-        <%= number_input(f, :lose, step: "any") %>
+        <%= label(f, :draw, class: "w-[20%] ") %>
+        <%= number_input(f, :draw, step: "any", class: " w-[70%] text-black rounded-lg ") %>
+        <%= error_tag(f, :draw) %>
+</div>
+              <div class="w-[50%]  flex gap-2  items-center p-2  ">
+
+        <%= label(f, :lose, class: "w-[20%] ") %>
+        <%= number_input(f, :lose, step: "any", class: " w-[70%] text-black rounded-lg ") %>
         <%= error_tag(f, :lose) %>
+        </div>
       </div>
 
       <div>
