@@ -1,7 +1,7 @@
-<div>
-  <h2><%= @title %></h2>
 
-  <.form
+<div class="bg-[#202941] text-white poppins-regular ">
+  <h2 class="text-[#92a0ca] poppins-bold text-4xl ml-[40%]"><%= @title %></h2>
+ <.form
     let={f}
     for={@changeset}
     id="user-form"
@@ -9,32 +9,59 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :firstname) %>
-    <%= text_input(f, :firstname) %>
-    <%= error_tag(f, :firstname) %>
+    <div class=" p-4 gap-4 w-[100%] flex flex-col  poppins-regular">
+      <div class="flex   justify-between w-[full]	 ">
+         <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :firstname, class: "text-sm text-[#92a0ca] poppins-bold  ") %>
+          <%= text_input(f, :firstname, class: " w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :firstname) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :lastname, class: "text-sm text-[#92a0ca] poppins-bold  ") %>
+          <%= text_input(f, :lastname, class: " w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :lastname) %>
+        </div>
+      </div>
 
-    <%= label(f, :lastname) %>
-    <%= text_input(f, :lastname) %>
-    <%= error_tag(f, :lastname) %>
+      <div class="flex justify-between   	w-[full] ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :msisdn, class: "text-sm text-[#92a0ca] poppins-bold  ") %>
+          <%= number_input(f, :phonenumber, class: " w-[95%] text-black rounded-lg ",required: true, placeholder: " enter phone number") %>
+          <%= error_tag(f, :phonenumber) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :email, class: "text-sm text-[#92a0ca] poppins-bold  ") %>
+          <%= email_input(f, :email, class: " w-[95%] text-black rounded-lg ",required: true) %>
+          <%= error_tag(f, :email) %>
+        </div>
+      </div>
+      <div class="flex justify-between	w-[full] ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :status, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= select(f, :status, ["active", "inactive"],
+            prompt: "set status",
+            class: "w-[95%] text-black rounded-lg "
+          ) %>
+          <%= error_tag(f, :status) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :role, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= select(f, :role, ["user", "admin", "superadmin"],
+            prompt: "set role",
+            class: "w-[95%] text-black rounded-lg "
+          ) %>
+          <%= error_tag(f, :role) %>
+        </div>
+      </div>
 
-    <%= label(f, :msisdn) %>
-    <%= number_input(f, :phone_number, required: true, placeholder: " enter phone number") %>
-    <%= error_tag(f, :phone_number) %>
+     
 
-    <%= label(f, :email) %>
-    <%= email_input(f, :email, required: true) %>
-    <%= error_tag(f, :email) %>
-
-    <%= label(f, :status) %>
-    <%= select(f, :status, ["active", "inactive"]) %>
-    <%= error_tag(f, :status) %>
-
-    <%= label(f, :role) %>
-    <%= select(f, :role, ["user", "admin", "superadmin"]) %>
-    <%= error_tag(f, :role) %>
-
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <div class="p-2  poppins-regular flex items-center justify-center">
+        <div class="py-2 px-12 rounded-lg bg-[#00A8FA] ">
+          <%= submit("Save", phx_disable_with: "Saving...") %>
+        </div>
+      </div>
     </div>
   </.form>
+  
 </div>
