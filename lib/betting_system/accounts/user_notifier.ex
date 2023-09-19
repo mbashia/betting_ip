@@ -8,7 +8,7 @@ defmodule BettingSystem.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"BettingSystem", "contact@example.com"})
+      |> from({"SportOdds", "v.mbashia@gs1kenya.org"})
       |> subject(subject)
       |> text_body(body)
 

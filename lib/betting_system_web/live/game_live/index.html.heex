@@ -42,7 +42,7 @@
         class="object-cover	 h-[100%] w-[100%]  "
       />
     </div>
-    <div class="flex justify-between text-white">
+    <div class="flex justify-between poppins-regular text-white">
       <%= if @user.role == "admin" do %>
         <span class="w-[30%]">Teams</span>
       <% else %>
@@ -54,7 +54,7 @@
         <div>2</div>
       </div>
       <%= if @user.role == "admin" do %>
-        <div class="w-[20%] ml-4">actions</div>
+        <div class="w-[20%] ml-[20%]">actions</div>
       <% end %>
     </div>
     <%= for  game <- @games do %>
@@ -96,20 +96,28 @@
         </div>
         <%= if @user.role == "admin" do %>
           <div class="w-[20%] ml-4">
-            <span>
-              <%= live_redirect("Show", to: Routes.game_show_path(@socket, :show, game)) %>
-            </span>
-            <span>
-              <%= live_patch("Edit", to: Routes.game_index_path(@socket, :edit, game)) %>
-            </span>
-            <span>
-              <%= link("Delete",
-                to: "#",
-                phx_click: "delete",
-                phx_value_id: game.id,
-                data: [confirm: "Are you sure?"]
-              ) %>
-            </span>
+          <div class="flex flex-row gap-2 justify-around">
+                <div>
+                  <%= live_redirect(to: Routes.game_show_path(@socket, :show, game)) do %>
+                    <%= Heroicons.icon("eye",
+                      type: "solid",
+                      class: "h-6  group-hover:text-green-600 text-green-400 w-6"
+                    ) %>
+                  <% end %>
+                </div>
+
+                <div>
+                  <%= live_patch(to: Routes.game_index_path(@socket, :edit, game)) do %>
+                    <%= Heroicons.icon("pencil",
+                      type: "solid",
+                      class: "h-6  group-hover:text-blue-600 text-blue-400 w-6"
+                    ) %>
+                  <% end %>
+                </div>
+
+               
+              </div>
+            
           </div>
         <% end %>
       </div>
@@ -199,7 +207,8 @@
           <div class="ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
             <%= submit("place bet",
               phx_disable_with: "Saving...",
-              class: "text-white poppins-regular"
+              class: "text-white poppins-regular",
+              disabled: @disabled
             ) %>
           </div>
         </.form>

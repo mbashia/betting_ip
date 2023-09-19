@@ -15,7 +15,9 @@ defmodule BettingSystem.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: BettingSystem.PubSub},
       # Start the Endpoint (http/https)
-      BettingSystemWeb.Endpoint
+      BettingSystemWeb.Endpoint,
+      {Finch, name: Swoosh.Finch}
+
       # Start a worker by calling: BettingSystem.Worker.start_link(arg)
       # {BettingSystem.Worker, arg}
     ]
