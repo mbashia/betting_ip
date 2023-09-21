@@ -59,25 +59,22 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js">
     </script>
-   
-    
+
     <%= @inner_content %>
     <script>
-    function toggle(){
-      element = document.getElementById("myDropdown").classList.toggle("invisible");
-    }
-    document.addEventListener("click", function(event) {
-                var dropdown = document.querySelector(".dropdownlist");
-                var dropButton = document.querySelector(".drop-button");
+          function toggle(){
+            element = document.getElementById("myDropdown").classList.toggle("invisible");
+          }
+          document.addEventListener("click", function(event) {
+                      var dropdown = document.querySelector(".dropdownlist");
+                      var dropButton = document.querySelector(".drop-button");
 
-                if (dropdown && !dropdown.contains(event.target) && !dropButton.contains(event.target)) {
-                        if (!dropdown.classList.contains('invisible')) {
-                        dropdown.classList.add('invisible');
-            }
-    }
-});
-
-
-</script>
+                      if (dropdown && !dropdown.contains(event.target) && !dropButton.contains(event.target)) {
+                              if (!dropdown.classList.contains('invisible')) {
+                              dropdown.classList.add('invisible');
+                  }
+          }
+      });
+    </script>
   </body>
 </html>

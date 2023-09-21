@@ -15,18 +15,8 @@ defmodule BettingSystemWeb.UserLive.Index do
 
     user = Accounts.get_user_by_session_token(session["user_token"]) |> Repo.preload(:betslips)
     users = Users.list_users()
-    user_bets = Bet.get_all_bets(user.id)
+    user_bets = Bet.get_all_bets(user.id)|>Enum.reverse()
 
-    # Enum.each(user_bets, fn bet ->
-    #   bet_items = bet.bet_items
-    #   game_ids = Map.values(bet_items)
-
-    #   Enum.each(game_ids, fn game_id ->
-    #     game = Games.get_game!(game_id)
-
-    #     IO.inspect(game)
-    #   end)
-    # end)
 
     {:ok,
      socket
@@ -115,6 +105,12 @@ defmodule BettingSystemWeb.UserLive.Index do
     {:noreply,
      socket
      |> assign(:check_bet_history, 1)}
+  end
+
+  def handle_event("close_pop_up", params, socket) do
+    {:noreply,
+     socket
+     |> assign(:check_bet_history, 0)}
   end
 
   def handle_info(:update_games, socket) do
