@@ -10,6 +10,8 @@
       <%= live_flash(@flash, :error) %>
     </p>
   <% end %>
+
+ 
   <nav class="flex justify-between bg-[#202A39]  text-white p-[30px]">
     <div class="">
       <p class="text-xl font-semibold poppins-bold">SportOdds</p>
@@ -29,11 +31,41 @@
     </div>
 
     <div>
-      <li>
-        <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
-      </li>
+      <div class="drop-button hover:cursor-pointer flex gap-2" onclick= "toggle()">
+        <div>
+          <%= Heroicons.icon("user-circle", type: "outline", class: "h-6 w-6") %>
+        </div>
+        <div class="flex items-center justify-center">
+          <%= Heroicons.icon("chevron-down", type: "outline", class: "h-4 w-4") %>
+        </div>
+      </div>
     </div>
   </nav>
+  <div
+ 
+      id="myDropdown"
+      class="dropdownlist flex flex-col gap-2 p-2 absolute bg-gray-800 w-[200px] invisible text-white top-[75px] right-0 mt-3  overflow-auto z-30 "
+    >
+      <%= link( to: Routes.user_index_path(@socket, :index)) do %>
+        <div class="flex gap-2">
+          <%= Heroicons.icon("user", type: "outline", class: "h-6 w-6") %>
+          <span class="align-top">profile</span>
+        </div>
+      <% end %>
+      <%= link( to: Routes.user_settings_path(@socket, :edit)) do %>
+        <div class="flex gap-2">
+          <%= Heroicons.icon("key", type: "outline", class: "h-4 w-4") %>
+          <span class="align-top">change password</span>
+        </div>
+      <% end %>
+      <%= link( to: Routes.user_session_path(@socket, :delete), method: :delete) do %>
+        <div class="flex gap-2">
+          <%= Heroicons.icon("arrow-left-on-rectangle", type: "outline", class: "h-6 w-6") %>
+          <span class="align-top">log out</span>
+        </div>
+      <% end %>
+    </div>
+
 
   <div class="bg-[#161F2C] flex justify-evenly poppins-light text-white  p-2">
     <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">

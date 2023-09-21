@@ -1,4 +1,3 @@
-
 <div
   id="mainDiv"
   class="h-[100vh] w-[100vw] bg-[#071C27] relative border flex flex-col justify-center items-center  border-transparent text-white"
@@ -11,14 +10,12 @@
     id="registrationForm"
     class=" bg-[#E5F2FC] flex flex-col     rounded-2xl  h-[45%] w-[35%] p-4"
   >
-<.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
-     
+    <.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
       <p class="poppins-light text-[#828F96] text-xl ml-10 ">
         Please enter email for reset password
       </p>
 
       <div class="m-4 text-[#828F96]">
-     
         <%= email_input(f, :email,
           required: true,
           placeholder: " enter  email",
@@ -26,7 +23,7 @@
         ) %>
         <%= error_tag(f, :email) %>
       </div>
-     
+
       <div class=" inline-block p-1 ml-[25px] px-6 bg-[#00A8FA]  rounded ">
         <%= submit("Send instructions to reset password") %>
       </div>
@@ -43,4 +40,3 @@
     </span>
   </div>
 </div>
-
