@@ -16,18 +16,21 @@ defmodule BettingSystemWeb.UserLive.Index do
     user = Accounts.get_user_by_session_token(session["user_token"]) |> Repo.preload(:betslips)
     users = Users.list_users()
     user_bets = Bet.get_all_bets(user.id) |> Enum.reverse()
-    number = if length(user_bets)==1 do
-      "bet"
-    else
-      "bets"
-    end
+
+    number =
+      if length(user_bets) == 1 do
+        "bet"
+      else
+        "bets"
+      end
+
     {:ok,
      socket
      |> assign(:clients, users)
      |> assign(:user, user)
      |> assign(:check_bet_history, 0)
      |> assign(:bets, user_bets)
-  |>assign(:number, number)}
+     |> assign(:number, number)}
   end
 
   @impl true
@@ -57,7 +60,6 @@ defmodule BettingSystemWeb.UserLive.Index do
     |> assign(:page_title, "Listing users")
     |> assign(:sport, nil)
   end
-
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do

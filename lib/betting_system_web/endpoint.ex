@@ -10,8 +10,13 @@ defmodule BettingSystemWeb.Endpoint do
     signing_salt: "LQbVli+a"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [:peer_data, session: @session_options]]
 
+
+# socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+
+  # Serv
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
