@@ -59,7 +59,11 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js">
     </script>
-
+    <%= link("Change my password",
+      to: Routes.user_settings_path(@conn, :edit),
+      class:
+        "mb-2 md:mb-0 block w-full text-blue-800 text-sm font-semibold rounded-lg  focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs  "
+    ) %>
     <%= @inner_content %>
   </body>
 </html>

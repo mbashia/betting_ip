@@ -25,7 +25,7 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:total_odds, 0.0)
      |> assign(:changeset, changeset)
      |> assign(:payout, 0.0)
-    |>assign(:disabled, true)}
+     |> assign(:disabled, true)}
   end
 
   @impl true
@@ -203,7 +203,7 @@ defmodule BettingSystemWeb.GameLive.Index do
     {:noreply,
      socket
      |> assign(:payout, payout)
-     |>assign(:disabled, false)}
+     |> assign(:disabled, false)}
   end
 
   defp list_games do
