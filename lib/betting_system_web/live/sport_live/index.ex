@@ -7,12 +7,26 @@ defmodule BettingSystemWeb.SportLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-    user = Accounts.get_user_by_session_token(session["user_token"])
 
+    {user, user_isset} = if is_nil(session["user_token"])do
+      {nil, 0}
+    else
+      { Accounts.get_user_by_session_token(session["user_token"]), 1 }    end
+      if is_nil(user)do
     {:ok,
      socket
      |> assign(:sports, list_sports())
-     |> assign(:user, user)}
+     |> assign(:user_isset, user_isset)
+    }
+      else
+        {:ok,
+        socket
+
+     |> assign(:sports, list_sports())
+     |> assign(:user, user)
+     |> assign(:user_isset, user_isset)
+    }
+      end
   end
 
   @impl true

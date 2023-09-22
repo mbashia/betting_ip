@@ -11,11 +11,16 @@ defmodule BettingSystemWeb.UserLive.Index do
   alias BettingSystem.Accounts.UserNotifier
   @impl true
   def mount(_params, session, socket) do
-    # :timer.send_interval(20000, self(), :update_games)
+    #:timer.send_interval(2000, self(), :update_games)
 
-    user = Accounts.get_user_by_session_token(session["user_token"]) |> Repo.preload(:betslips)
-    users = Users.list_users()
+    {user, user_isset} = if is_nil(session["user_token"])do
+      {nil, 0}
+    else
+      { Accounts.get_user_by_session_token(session["user_token"]), 1 }    end
+          users = Users.list_users()
     user_bets = Bet.get_all_bets(user.id) |> Enum.reverse()
+    peer_data = get_connect_info(socket, :peer_data)
+    ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
 
     number =
       if length(user_bets) == 1 do
@@ -23,14 +28,29 @@ defmodule BettingSystemWeb.UserLive.Index do
       else
         "bets"
       end
+      if is_nil(user)do
 
     {:ok,
      socket
      |> assign(:clients, users)
-     |> assign(:user, user)
      |> assign(:check_bet_history, 0)
+     |> assign(:user_isset, user_isset)
+
      |> assign(:bets, user_bets)
-     |> assign(:number, number)}
+     |> assign(:number, number)
+    |>assign(:ip, ip_addr)}
+      else
+        {:ok,
+        socket
+        |> assign(:clients, users)
+        |> assign(:user, user)
+        |> assign(:check_bet_history, 0)
+        |> assign(:user_isset, user_isset)
+
+        |> assign(:bets, user_bets)
+        |> assign(:number, number)
+       |>assign(:ip, ip_addr)}
+      end
   end
 
   @impl true
@@ -121,7 +141,7 @@ defmodule BettingSystemWeb.UserLive.Index do
   end
 
   def handle_info(:update_games, socket) do
-    user_betslips = Betslips.get_betslip_user_id(socket.assigns.user.id)
+    user_betslips = Betslips.get_betslip_user_id(socket.assigns.ip)
 
     Enum.each(user_betslips, fn betslip ->
       game_id = betslip.game_id
@@ -149,7 +169,7 @@ defmodule BettingSystemWeb.UserLive.Index do
       bet_status =
         Enum.reduce(game_ids, :win, fn x, acc ->
           IO.write("Checking betslip for game ID #{x}")
-          betslip = Betslips.getting_betslip(socket.assigns.user.id, x)
+          betslip = Betslips.getting_betslip(socket.assigns.ip, x)
           IO.inspect(betslip)
           IO.write("above inspected betslip")
 

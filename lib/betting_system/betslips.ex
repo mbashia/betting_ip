@@ -21,31 +21,31 @@ defmodule BettingSystem.Betslips do
     Repo.all(Betslip)
   end
 
-  def get_betslips(id) do
-    Repo.all(from b in Betslip, where: b.user_id == ^id and b.status == "in_betslip")
+  def check_betslip(ip) do
+    Repo.all(from b in Betslip, where: b.ip == ^ip and b.status == "in_betslip")
     |> Repo.preload(:game)
   end
-
-  def check_betslip!(id, game_id) do
+  def get_betslips(ip) do
+    Repo.all(from b in Betslip, where: b.ip == ^ip and b.status == "in_betslip")
+    |> Repo.preload(:game)
+  end
+  def check_betslip!(ip, game_id) do
     Repo.one(
       from b in Betslip,
-        where: b.user_id == ^id and b.game_id == ^game_id and b.status == "in_betslip"
+        where: b.ip == ^ip and b.game_id == ^game_id and b.status == "in_betslip"
     )
   end
 
-  def getting_betslip(id, game_id) do
-    Repo.one(from b in Betslip, where: b.user_id == ^id and b.game_id == ^game_id)
+  def getting_betslip(ip, game_id) do
+    Repo.one(from b in Betslip, where: b.ip == ^ip and b.game_id == ^game_id)
   end
 
-  def get_betslip_user_id(id) do
-    Repo.all(from b in Betslip, where: b.user_id == ^id)
+  def get_betslip_user_id(ip) do
+    Repo.all(from b in Betslip, where: b.ip == ^ip)
     |> Repo.preload(:game)
   end
 
-  # def get_betslip_by_game_id(id, game_id)do
-  #   Repo.one(from b in Betslip, where: b.user_id == ^id and b.game_id == ^game_id)
 
-  # end
 
   @doc """
   Gets a single betslip.

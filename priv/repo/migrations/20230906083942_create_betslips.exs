@@ -7,10 +7,12 @@ defmodule BettingSystem.Repo.Migrations.CreateBetslips do
       add :odds, :float
       add :result_type, :string
       add :game_id, :integer
-      add :user_id, :integer
+      add :ip, :string
       add :end_result, :string, default: "nothing"
 
       timestamps()
     end
+    create index(:betslips, [:ip])
+
   end
 end

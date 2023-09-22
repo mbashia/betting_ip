@@ -108,7 +108,7 @@
     bottom: 0px;
     width: 300px; height:100%; ">
     <div style="display:flex; flex-direction:column; width:100% height:100%;">
-      <%= if @user.role == "admin" || @user.role == "superadmin" do %>
+      <%= if @user_isset==1 && @user.role == "admin" do %>
         <div class="mx-[20px] mb-[20px]" style=" padding:2px; color:blue;">dashboard</div>
         <div style="margin:20px; padding:2px; color:blue;">
           <span>
@@ -232,8 +232,7 @@
       <% end %>
     </div>
   </div>
-  <%= if @user.role == "admin" || @user.role == "superadmin" do %>
-    <div style="padding-left:200px;">
+ <%= if @user_isset==1 && @user.role == "admin" do %>    <div style="padding-left:200px;">
       <%= @inner_content %>
     </div>
   <% else %>

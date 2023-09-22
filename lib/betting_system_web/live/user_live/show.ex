@@ -19,6 +19,9 @@ defmodule BettingSystemWeb.UserLive.Show do
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
     user_bets = Bet.get_all_bets(id) |> Enum.reverse()
+    peer_data = get_connect_info(socket, :peer_data)
+    ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
+
 
     number =
       if length(user_bets) == 1 do
@@ -30,7 +33,7 @@ defmodule BettingSystemWeb.UserLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:betslips, Betslips.get_betslip_user_id(id))
+     |> assign(:betslips, Betslips.get_betslip_user_id(ip_addr))
      |> assign(:system_user, Users.get_user!(id))
      |> assign(:bets, user_bets)
      |> assign(:number, number)}

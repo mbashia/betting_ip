@@ -20,7 +20,9 @@ defmodule BettingSystemWeb.Router do
   scope "/", BettingSystemWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    live "/", GameLive.Index, :index
+
   end
 
   # Other scopes may use custom stacks.
@@ -89,9 +91,10 @@ defmodule BettingSystemWeb.Router do
 
     live "/sports/:id", SportLive.Show, :show
     live "/sports/:id/show/edit", SportLive.Show, :edit
-    live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
     live "/games/:id/edit", GameLive.Index, :edit
+    live "/games", GameLive.Index, :index
+
 
     live "/games/:id", GameLive.Show, :show
     live "/games/:id/show/edit", GameLive.Show, :edit
