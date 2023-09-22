@@ -11,28 +11,28 @@ defmodule BettingSystemWeb.SimulategamesLive.Index do
   alias BettingSystem.Accounts.UserNotifier
 
   def mount(_params, session, socket) do
-    {user, user_isset} = if is_nil(session["user_token"])do
-      {nil, 0}
-    else
-      { Accounts.get_user_by_session_token(session["user_token"]), 1 }    end
+    {user, user_isset} =
+      if is_nil(session["user_token"]) do
+        {nil, 0}
+      else
+        {Accounts.get_user_by_session_token(session["user_token"]), 1}
+      end
 
     games = Games.list_games()
-    if is_nil(user)do
-    {:ok,
-     socket
-     |> assign(:games, games)
-     |> assign(:pending_error, "")
-     |> assign(:user_isset, user_isset)
 
-    }
+    if is_nil(user) do
+      {:ok,
+       socket
+       |> assign(:games, games)
+       |> assign(:pending_error, "")
+       |> assign(:user_isset, user_isset)}
     else
       {:ok,
-      socket
-      |> assign(:user, user)
-      |> assign(:games, games)
-      |> assign(:pending_error, "")
-      |> assign(:user_isset, user_isset)
-    }
+       socket
+       |> assign(:user, user)
+       |> assign(:games, games)
+       |> assign(:pending_error, "")
+       |> assign(:user_isset, user_isset)}
     end
   end
 

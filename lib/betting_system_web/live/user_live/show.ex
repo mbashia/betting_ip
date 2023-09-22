@@ -22,7 +22,6 @@ defmodule BettingSystemWeb.UserLive.Show do
     peer_data = get_connect_info(socket, :peer_data)
     ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
 
-
     number =
       if length(user_bets) == 1 do
         "bet"

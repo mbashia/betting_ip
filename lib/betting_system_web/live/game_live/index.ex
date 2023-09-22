@@ -14,46 +14,45 @@ defmodule BettingSystemWeb.GameLive.Index do
     peer_data = get_connect_info(socket, :peer_data)
     ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
     # user = Accounts.get_user_by_session_token(session["user_token"])
-    {user, user_isset} = if is_nil(session["user_token"])do
-      {nil, 0}
-    else
-      { Accounts.get_user_by_session_token(session["user_token"]), 1 }    end
+    {user, user_isset} =
+      if is_nil(session["user_token"]) do
+        {nil, 0}
+      else
+        {Accounts.get_user_by_session_token(session["user_token"]), 1}
+      end
 
-IO.inspect(user_isset)
+    IO.inspect(user_isset)
 
     # selected_bets = Betslips.get_betslips(ip_addr)
     changeset = Bet.change_bets(%Bets{})
-   if is_nil(user)do
-    IO.inspect(user)
-    {:ok,
-     socket
-     |> assign(:games, list_games())
-     |> assign(:user_isset, user_isset)
 
-     |> assign(:bets, [])
-     |> assign(:total_odds, 0.0)
-     |> assign(:changeset, changeset)
-     |> assign(:payout, 0.0)
-     |> assign(:disabled, true)
-    |>assign(:ip,ip_addr)}
-   else
-    {:ok,
-    socket
-    |> assign(:games, list_games())
-    |> assign(:user, user)
-    |> assign(:user_isset, user_isset)
+    if is_nil(user) do
+      IO.inspect(user)
 
-    |> assign(:sports, Sports.list_sports(user.id))
-    |> assign(:bets, [])
-    |> assign(:total_odds, 0.0)
-    |> assign(:changeset, changeset)
-    |> assign(:payout, 0.0)
-    |> assign(:disabled, true)
-   |>assign(:ip,ip_addr)}
-   end
-
-
-
+      {:ok,
+       socket
+       |> assign(:games, list_games())
+       |> assign(:user_isset, user_isset)
+       |> assign(:bets, [])
+       |> assign(:total_odds, 0.0)
+       |> assign(:changeset, changeset)
+       |> assign(:payout, 0.0)
+       |> assign(:disabled, true)
+       |> assign(:ip, ip_addr)}
+    else
+      {:ok,
+       socket
+       |> assign(:games, list_games())
+       |> assign(:user, user)
+       |> assign(:user_isset, user_isset)
+       |> assign(:sports, Sports.list_sports(user.id))
+       |> assign(:bets, [])
+       |> assign(:total_odds, 0.0)
+       |> assign(:changeset, changeset)
+       |> assign(:payout, 0.0)
+       |> assign(:disabled, true)
+       |> assign(:ip, ip_addr)}
+    end
   end
 
   @impl true

@@ -22,7 +22,6 @@ defmodule BettingSystemWeb.Router do
 
     # get "/", PageController, :index
     live "/", GameLive.Index, :index
-
   end
 
   # Other scopes may use custom stacks.
@@ -94,7 +93,6 @@ defmodule BettingSystemWeb.Router do
     live "/games/new", GameLive.Index, :new
     live "/games/:id/edit", GameLive.Index, :edit
     live "/games", GameLive.Index, :index
-
 
     live "/games/:id", GameLive.Show, :show
     live "/games/:id/show/edit", GameLive.Show, :edit

@@ -11,13 +11,16 @@ defmodule BettingSystemWeb.UserLive.Index do
   alias BettingSystem.Accounts.UserNotifier
   @impl true
   def mount(_params, session, socket) do
-    #:timer.send_interval(2000, self(), :update_games)
+    # :timer.send_interval(2000, self(), :update_games)
 
-    {user, user_isset} = if is_nil(session["user_token"])do
-      {nil, 0}
-    else
-      { Accounts.get_user_by_session_token(session["user_token"]), 1 }    end
-          users = Users.list_users()
+    {user, user_isset} =
+      if is_nil(session["user_token"]) do
+        {nil, 0}
+      else
+        {Accounts.get_user_by_session_token(session["user_token"]), 1}
+      end
+
+    users = Users.list_users()
     user_bets = Bet.get_all_bets(user.id) |> Enum.reverse()
     peer_data = get_connect_info(socket, :peer_data)
     ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
@@ -28,29 +31,27 @@ defmodule BettingSystemWeb.UserLive.Index do
       else
         "bets"
       end
-      if is_nil(user)do
 
-    {:ok,
-     socket
-     |> assign(:clients, users)
-     |> assign(:check_bet_history, 0)
-     |> assign(:user_isset, user_isset)
-
-     |> assign(:bets, user_bets)
-     |> assign(:number, number)
-    |>assign(:ip, ip_addr)}
-      else
-        {:ok,
-        socket
-        |> assign(:clients, users)
-        |> assign(:user, user)
-        |> assign(:check_bet_history, 0)
-        |> assign(:user_isset, user_isset)
-
-        |> assign(:bets, user_bets)
-        |> assign(:number, number)
-       |>assign(:ip, ip_addr)}
-      end
+    if is_nil(user) do
+      {:ok,
+       socket
+       |> assign(:clients, users)
+       |> assign(:check_bet_history, 0)
+       |> assign(:user_isset, user_isset)
+       |> assign(:bets, user_bets)
+       |> assign(:number, number)
+       |> assign(:ip, ip_addr)}
+    else
+      {:ok,
+       socket
+       |> assign(:clients, users)
+       |> assign(:user, user)
+       |> assign(:check_bet_history, 0)
+       |> assign(:user_isset, user_isset)
+       |> assign(:bets, user_bets)
+       |> assign(:number, number)
+       |> assign(:ip, ip_addr)}
+    end
   end
 
   @impl true

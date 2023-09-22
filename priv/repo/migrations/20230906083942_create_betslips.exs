@@ -12,7 +12,7 @@ defmodule BettingSystem.Repo.Migrations.CreateBetslips do
 
       timestamps()
     end
-    create index(:betslips, [:ip])
 
+    create index(:betslips, [:ip])
   end
 end

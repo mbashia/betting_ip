@@ -25,10 +25,12 @@ defmodule BettingSystem.Betslips do
     Repo.all(from b in Betslip, where: b.ip == ^ip and b.status == "in_betslip")
     |> Repo.preload(:game)
   end
+
   def get_betslips(ip) do
     Repo.all(from b in Betslip, where: b.ip == ^ip and b.status == "in_betslip")
     |> Repo.preload(:game)
   end
+
   def check_betslip!(ip, game_id) do
     Repo.one(
       from b in Betslip,
@@ -44,8 +46,6 @@ defmodule BettingSystem.Betslips do
     Repo.all(from b in Betslip, where: b.ip == ^ip)
     |> Repo.preload(:game)
   end
-
-
 
   @doc """
   Gets a single betslip.

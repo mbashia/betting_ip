@@ -19,7 +19,7 @@ defmodule BettingSystem.Betslips.Betslip do
   @doc false
   def changeset(betslip, attrs) do
     betslip
-    |> cast(attrs, [:status, :odds, :result_type, :game_id, :end_result,:ip ])
-    |> validate_required([:status, :odds, :result_type, :game_id, :end_result,:ip ])
+    |> cast(attrs, [:status, :odds, :result_type, :game_id, :end_result, :ip])
+    |> validate_required([:status, :odds, :result_type, :game_id, :end_result, :ip])
   end
 end

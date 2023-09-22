@@ -232,7 +232,8 @@
       <% end %>
     </div>
   </div>
- <%= if @user_isset==1 && @user.role == "admin" do %>    <div style="padding-left:200px;">
+  <%= if @user_isset==1 && @user.role == "admin" do %>
+    <div style="padding-left:200px;">
       <%= @inner_content %>
     </div>
   <% else %>
